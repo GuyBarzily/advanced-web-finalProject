@@ -9,11 +9,14 @@ import MenuIcon from "@mui/icons-material/Menu";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import { TextField } from "@mui/material";
+import { Badge, TextField } from "@mui/material";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
 function AppBarComponent() {
   const [logedIn, setLogedIn] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
+  const [cartValue, setCartValue] = useState(2);
+  const [search, setSearch] = useState("");
   const open = Boolean(anchorEl);
   const openMenuHandle = (event) => {
     setAnchorEl(event.currentTarget);
@@ -22,6 +25,11 @@ function AppBarComponent() {
   const handleClose = (event) => {
     console.log(event.currentTarget.id);
     setAnchorEl(null);
+  };
+
+  const handleSearch = () => {
+    console.log(search);
+    setSearch("");
   };
 
   return (
@@ -46,10 +54,45 @@ function AppBarComponent() {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             The Gamers Den
           </Typography>
-          <TextField
-            style={{ alignSelf: "center" }}
+          <div style={{ paddingRight: "1vw" }}>
+            <input
+              style={{
+                borderRadius: "10px",
+                height: "3vh",
+              }}
+              type="text"
+              id="lname"
+              name="lname"
+              placeholder="Search"
+              onChange={(e) => {
+                setSearch(e.target.value);
+              }}
+            />
+          </div>
+          <Button
+            size="small"
+            sx={{
+              color: "white",
+              border: 1,
+              borderRadius: "10px",
+            }}
+            onClick={handleSearch}
+          >
+            Submit
+          </Button>
+
+          {/* <TextField
+            style={{ alignSelf: "center", outlineColor: "white" }}
             placeholder="search"
-          ></TextField>
+          ></TextField> */}
+          {!logedIn && (
+            <div style={{ paddingRight: "1vw", paddingLeft: "1vw" }}>
+              <Badge color="secondary" badgeContent={cartValue}>
+                <ShoppingCartIcon />
+              </Badge>
+            </div>
+          )}
+
           <Button
             aria-controls={open ? "basic-menu" : undefined}
             aria-haspopup="true"
