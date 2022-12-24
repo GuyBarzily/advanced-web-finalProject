@@ -7,7 +7,7 @@ import Select from "@mui/material/Select";
 import { Typography } from "@mui/material";
 
 function GamesTitle() {
-  const [sortBy, setSortBy] = useState("");
+  const [sortBy, setSortBy] = useState("Featured");
 
   const handleChange = (event) => {
     setSortBy(event.target.value);
@@ -22,7 +22,7 @@ function GamesTitle() {
       }}
     >
       <Typography variant="h4" style={{ marginLeft: "10vw" }}>
-        Featured Games
+        Games by {sortBy}
       </Typography>
       <Box sx={{ minWidth: "10vw" }}>
         <FormControl fullWidth>
@@ -34,9 +34,9 @@ function GamesTitle() {
             label="Sort"
             onChange={handleChange}
           >
-            <MenuItem value={"featured"}>Featured</MenuItem>
-            <MenuItem value={"relese-date"}>Release Date</MenuItem>
-            <MenuItem value={"popularity"}>Popularity</MenuItem>
+            <MenuItem value={"Featured"}>Featured</MenuItem>
+            <MenuItem value={"Release Date"}>Release Date</MenuItem>
+            <MenuItem value={"Popularity"}>Popularity</MenuItem>
           </Select>
         </FormControl>
       </Box>

@@ -30,7 +30,7 @@ function SmallGame(props) {
   };
 
   const handleClick = () => {
-    console.log(item.title);
+    props.onClick(item);
   };
 
   useEffect(() => {
@@ -52,7 +52,13 @@ function SmallGame(props) {
           onClick={handleClick}
         />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
+          <Typography
+            onClick={handleClick}
+            gutterBottom
+            variant="h5"
+            component="div"
+            sx={{ cursor: "pointer" }}
+          >
             {item.title}
           </Typography>
           <Typography variant="body2" color="text.secondary">
