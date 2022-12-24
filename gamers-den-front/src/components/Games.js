@@ -1,3 +1,4 @@
+import { Box } from "@mui/material";
 import React from "react";
 import SmallGame from "./SmallGame";
 
@@ -34,30 +35,43 @@ function Games() {
   ];
 
   return (
-    <div>
-      <div style={{ marginInline: "15vw", display: "flex" }}>
-        <SmallGame key="5" item={items[0]} />
-        <SmallGame key="1" item={items[1]} />
-        <SmallGame key="3" item={items[0]} />
-      </div>
-      <div style={{ marginInline: "10vw", display: "flex" }}>
-        <SmallGame key="5" item={items[0]} />
-        <SmallGame key="1" item={items[1]} />
-        <SmallGame key="3" item={items[0]} />
-        <SmallGame key="4" item={items[1]} />
-      </div>
-      <div style={{ marginInline: "10vw", display: "flex" }}>
-        <SmallGame key="5" item={items[0]} />
-        <SmallGame key="1" item={items[1]} />
-        <SmallGame key="3" item={items[0]} />
-        <SmallGame key="4" item={items[1]} />
-      </div>
-      <div style={{ marginInline: "10vw", display: "flex" }}>
-        <SmallGame key="5" item={items[0]} />
-        <SmallGame key="1" item={items[1]} />
-        <SmallGame key="3" item={items[0]} />
-        <SmallGame key="4" item={items[1]} />
-      </div>
+    <div style={{ marginTop: "5vh" }}>
+      <h1 style={{ marginLeft: "10vw" }}>Featured Games</h1>
+      <Box
+        sx={{
+          flexDirection: "row",
+          display: "flex",
+          p: 1,
+          m: 1,
+          borderRadius: 1,
+          flexWrap: "wrap",
+          justifyContent: "center",
+        }}
+      >
+        <SmallGame item={items[0]} />
+        <SmallGame item={items[1]} />
+        <SmallGame item={items[0]} />
+        <SmallGame item={items[1]} />
+        <SmallGame item={items[0]} />
+        <SmallGame item={items[1]} />
+        <SmallGame item={items[0]} />
+        <SmallGame item={items[1]} />
+        <SmallGame item={items[0]} />
+        <SmallGame item={items[1]} />
+        <SmallGame item={items[0]} />
+        <SmallGame item={items[0]} />
+        <SmallGame item={items[1]} />
+        <SmallGame item={items[0]} />
+        <SmallGame item={items[0]} />
+        <SmallGame item={items[1]} />
+        <SmallGame item={items[0]} />
+        <SmallGame item={items[0]} />
+        <SmallGame item={items[1]} />
+        <SmallGame item={items[0]} />
+        <SmallGame item={items[0]} />
+        <SmallGame item={items[1]} />
+        <SmallGame item={items[0]} />
+      </Box>
     </div>
   );
 }

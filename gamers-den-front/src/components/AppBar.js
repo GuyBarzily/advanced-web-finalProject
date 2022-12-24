@@ -9,8 +9,10 @@ import MenuIcon from "@mui/icons-material/Menu";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
+import { TextField } from "@mui/material";
 
 function AppBarComponent() {
+  const [logedIn, setLogedIn] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const openMenuHandle = (event) => {
@@ -25,7 +27,7 @@ function AppBarComponent() {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar
-        position="fixed"
+        position="absolute"
         sx={{
           background:
             "linear-gradient(90deg, rgba(32,32,32,1) 0%, rgba(40,40,59,1) 61%, rgba(32,32,32,1) 100%);",
@@ -44,6 +46,10 @@ function AppBarComponent() {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             The Gamers Den
           </Typography>
+          <TextField
+            style={{ alignSelf: "center" }}
+            placeholder="search"
+          ></TextField>
           <Button
             aria-controls={open ? "basic-menu" : undefined}
             aria-haspopup="true"
@@ -65,8 +71,12 @@ function AppBarComponent() {
             <MenuItem id="profile" onClick={handleClose}>
               Profile
             </MenuItem>
-            <MenuItem onClick={handleClose}>My account</MenuItem>
-            <MenuItem onClick={handleClose}>Logout</MenuItem>
+            <MenuItem id="acount" onClick={handleClose}>
+              My account
+            </MenuItem>
+            <MenuItem id="logIn" onClick={handleClose}>
+              {!logedIn ? "Log In" : "Log Out"}
+            </MenuItem>
           </Menu>
         </Toolbar>
       </AppBar>

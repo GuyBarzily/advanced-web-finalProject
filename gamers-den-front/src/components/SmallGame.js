@@ -6,19 +6,33 @@ import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Rating from "@mui/material/Rating";
-import AddIcon from "@mui/icons-material/Add";
+import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 
 function SmallGame(props) {
   const [value, setValue] = useState(2);
   const [item, setItem] = useState("");
+
+  const handleClick = () => {
+    console.log(item.title);
+  };
 
   useEffect(() => {
     setItem(props.item);
   }, [props.item]);
 
   return (
-    <Card sx={{ minWidth: "10vw", margin: "2vw", maxBlockSize: "45vh" }}>
-      <CardMedia component="img" image={item.thumbnail} title="small game" />
+    <Card
+      sx={{
+        margin: "1vw",
+      }}
+    >
+      <CardMedia
+        component="img"
+        image={item.thumbnail}
+        title="small game"
+        sx={{ cursor: "pointer" }}
+        onClick={handleClick}
+      />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
           {item.title}
@@ -31,19 +45,9 @@ function SmallGame(props) {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">
-          Add To List
-          <AddIcon fontSize="small" />
-        </Button>
-        <Button size="small">Learn More</Button>
-      </CardActions>
-      <CardActions
-        sx={{
-          alignSelf: "baseline-position",
-          justifySelf: "baseline-position",
-        }}
-      >
+        <AddShoppingCartIcon />
         <Rating
+          //  sx={{ paddingLeft: "5vw" }}
           name="simple-controlled"
           value={value}
           onChange={(event, newValue) => {
@@ -51,6 +55,15 @@ function SmallGame(props) {
           }}
         />
       </CardActions>
+      {/* <CardActions sx={{}}>
+        <Rating
+          name="simple-controlled"
+          value={value}
+          onChange={(event, newValue) => {
+            setValue(newValue);
+          }}
+        />
+      </CardActions> */}
     </Card>
   );
 }
