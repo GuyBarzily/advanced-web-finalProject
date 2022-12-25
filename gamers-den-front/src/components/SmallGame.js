@@ -1,57 +1,91 @@
 import React, { useEffect, useState } from "react";
-import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
-import Rating from "@mui/material/Rating";
-import AddIcon from "@mui/icons-material/Add";
+import {
+  Card,
+  Box,
+  CardActions,
+  CardContent,
+  CardMedia,
+  Typography,
+  Rating,
+  Alert,
+} from "@mui/material";
+import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 
 function SmallGame(props) {
   const [value, setValue] = useState(2);
   const [item, setItem] = useState("");
+  const [addAlert, setAddAlert] = useState(false);
+  const [faildAlert, setFailedAlert] = useState(false);
+
+  const handleShopCartAdd = () => {
+    console.log(item);
+    // setAddAlert(true);
+    // setTimeout(() => {
+    //   setAddAlert(false);
+    // }, 3000);
+    setFailedAlert(true);
+    setTimeout(() => {
+      setFailedAlert(false);
+    }, 3000);
+  };
+
+  const handleClick = () => {
+    props.onClick(item);
+  };
 
   useEffect(() => {
     setItem(props.item);
   }, [props.item]);
 
   return (
-    <Card sx={{ minWidth: "10vw", margin: "2vw", maxBlockSize: "45vh" }}>
-      <CardMedia component="img" image={item.thumbnail} title="small game" />
-      <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
-          {item.title}
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-          {"Release date: " + item.release_date}
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-          {"Genre: " + item.genre}
-        </Typography>
-      </CardContent>
-      <CardActions>
-        <Button size="small">
-          Add To List
-          <AddIcon fontSize="small" />
-        </Button>
-        <Button size="small">Learn More</Button>
-      </CardActions>
-      <CardActions
+    <div>
+      <Card
         sx={{
-          alignSelf: "baseline-position",
-          justifySelf: "baseline-position",
+          margin: "1vw",
         }}
       >
-        <Rating
-          name="simple-controlled"
-          value={value}
-          onChange={(event, newValue) => {
-            setValue(newValue);
-          }}
+        <CardMedia
+          component="img"
+          image={item.thumbnail}
+          title="small game"
+          sx={{ cursor: "pointer" }}
+          onClick={handleClick}
         />
-      </CardActions>
-    </Card>
+        <CardContent>
+          <Typography
+            onClick={handleClick}
+            gutterBottom
+            variant="h5"
+            component="div"
+            sx={{ cursor: "pointer" }}
+          >
+            {item.title}
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            {"Release date: " + item.release_date}
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            {"Genre: " + item.genre}
+          </Typography>
+        </CardContent>
+        <CardActions>
+          <AddShoppingCartIcon
+            sx={{ cursor: "pointer" }}
+            onClick={handleShopCartAdd}
+          />
+          <Rating
+            sx={{ paddingLeft: "1vw" }}
+            name="simple-controlled"
+            value={value}
+            onChange={(event, newValue) => {
+              setValue(newValue);
+            }}
+          />
+        </CardActions>
+      </Card>
+      {addAlert && <Alert severity="success">Item Added To Cart</Alert>}
+      {faildAlert && <Alert severity="error">Item Allredy in Cart</Alert>}
+    </div>
   );
 }
 

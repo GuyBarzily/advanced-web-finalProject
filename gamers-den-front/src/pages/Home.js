@@ -6,10 +6,10 @@ import React from "react";
 
 function Home() {
   return (
-    <div>
+    <div style={{ backgroundColor: "#DDDDDD" }}>
       <AppBarComponent />
       <MainGameComp />
-      <MainSortBar />
+      {/* <MainSortBar /> */}
       <Games />
     </div>
   );

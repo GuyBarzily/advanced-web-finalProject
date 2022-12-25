@@ -1,7 +1,12 @@
-import React from "react";
+import { Box, Alert } from "@mui/material";
+import React, { useEffect, useState } from "react";
+import GameModal from "./GameModal";
+import GamesTitle from "./GamesTitle";
 import SmallGame from "./SmallGame";
 
 function Games() {
+  const [openGame, setOpenGame] = useState(false);
+  const [modalItem, setModalItem] = useState("");
   const items = [
     {
       id: 508,
@@ -31,33 +36,77 @@ function Games() {
       release_date: "2022-01-12",
       freetogame_profile_url: "https://www.freetogame.com/pubg",
     },
+    {
+      id: 540,
+      title: "Overwatch 2",
+      thumbnail: "https://www.freetogame.com/g/540/thumbnail.jpg",
+      short_description:
+        "A hero-focused first-person team shooter from Blizzard Entertainment.",
+      game_url: "https://www.freetogame.com/open/overwatch-2",
+      genre: "Shooter",
+      platform: "PC (Windows)",
+      publisher: "Activision Blizzard",
+      developer: "Blizzard Entertainment",
+      release_date: "2022-10-04",
+      freetogame_profile_url: "https://www.freetogame.com/overwatch-2",
+    },
+    {
+      id: 521,
+      title: "Diablo Immortal",
+      thumbnail: "https://www.freetogame.com/g/521/thumbnail.jpg",
+      short_description:
+        "Built for mobile and also released on PC, Diablo Immortal fills in the gaps between Diablo II and III in an MMOARPG environment.",
+      game_url: "https://www.freetogame.com/open/diablo-immortal",
+      genre: "MMOARPG",
+      platform: "PC (Windows)",
+      publisher: "Blizzard Entertainment",
+      developer: "Blizzard Entertainment",
+      release_date: "2022-06-02",
+      freetogame_profile_url: "https://www.freetogame.com/diablo-immortal",
+    },
+    {
+      id: 517,
+      title: "Lost Ark",
+      thumbnail: "https://www.freetogame.com/g/517/thumbnail.jpg",
+      short_description:
+        "Smilegate’s free-to-play multiplayer ARPG is a massive adventure filled with lands waiting to be explored, people waiting to be met, and an ancient evil waiting to be destroyed.",
+      game_url: "https://www.freetogame.com/open/lost-ark",
+      genre: "ARPG",
+      platform: "PC (Windows)",
+      publisher: "Amazon Games",
+      developer: "Smilegate RPG",
+      release_date: "2022-02-11",
+      freetogame_profile_url: "https://www.freetogame.com/lost-ark",
+    },
   ];
 
+  const openModal = (item) => {
+    setOpenGame(true);
+    setModalItem(item);
+  };
+  const closeModal = () => {
+    setOpenGame(false);
+  };
+
   return (
-    <div>
-      <div style={{ marginInline: "15vw", display: "flex" }}>
-        <SmallGame key="5" item={items[0]} />
-        <SmallGame key="1" item={items[1]} />
-        <SmallGame key="3" item={items[0]} />
-      </div>
-      <div style={{ marginInline: "10vw", display: "flex" }}>
-        <SmallGame key="5" item={items[0]} />
-        <SmallGame key="1" item={items[1]} />
-        <SmallGame key="3" item={items[0]} />
-        <SmallGame key="4" item={items[1]} />
-      </div>
-      <div style={{ marginInline: "10vw", display: "flex" }}>
-        <SmallGame key="5" item={items[0]} />
-        <SmallGame key="1" item={items[1]} />
-        <SmallGame key="3" item={items[0]} />
-        <SmallGame key="4" item={items[1]} />
-      </div>
-      <div style={{ marginInline: "10vw", display: "flex" }}>
-        <SmallGame key="5" item={items[0]} />
-        <SmallGame key="1" item={items[1]} />
-        <SmallGame key="3" item={items[0]} />
-        <SmallGame key="4" item={items[1]} />
-      </div>
+    <div style={{ marginTop: "5vh" }}>
+      <GamesTitle />
+      <GameModal open={openGame} setClose={closeModal} game={modalItem} />
+      <Box
+        sx={{
+          flexDirection: "row",
+          display: "flex",
+          p: 1,
+          m: 1,
+          borderRadius: 1,
+          flexWrap: "wrap",
+          justifyContent: "center",
+        }}
+      >
+        {items.map((game, index) => {
+          return <SmallGame key={index} item={game} onClick={openModal} />;
+        })}
+      </Box>
     </div>
   );
 }
