@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import Carousel from 'better-react-carousel';
+
 //import { Box } from '@mui/material';
 //import {Card} from "@mui/material"
 import Box from '@mui/joy/Box';
 import Card from '@mui/joy/Card';
 import CardCover from '@mui/joy/CardCover';
+
 
 const GameCarousel = (props) => {
   // const [games, setGames] = useState([]);
@@ -45,6 +47,7 @@ const GameCarousel = (props) => {
   ];
 
   return (
+
     // <Box sx={{height:"50vh",width: "50vw",display:"flex",justifyContent: "center"
     // ,alignContent:"center", paddingLeft: "25vw", paddingTop: "8vh", flex: "flex-wrap",}}>
       
@@ -67,6 +70,7 @@ const GameCarousel = (props) => {
 
     </CardCover>
     </Card>
+
     
   );
 };
