@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import Carousel from 'better-react-carousel';
-import { Box } from '@mui/material';
-import SmallGame from './SmallGame';
+//import { Box } from '@mui/material';
+//import {Card} from "@mui/material"
+import Box from '@mui/joy/Box';
+import Card from '@mui/joy/Card';
+import CardCover from '@mui/joy/CardCover';
 
 const GameCarousel = (props) => {
   // const [games, setGames] = useState([]);
@@ -42,24 +45,28 @@ const GameCarousel = (props) => {
   ];
 
   return (
-    <Box sx={{height:"50vh",width: "50vw",display:"flex",justifyContent: "center"
-    ,alignContent:"center", paddingLeft: "25vw", paddingTop: "8vh", flex: "flex-wrap"}}>
+    // <Box sx={{height:"50vh",width: "50vw",display:"flex",justifyContent: "center"
+    // ,alignContent:"center", paddingLeft: "25vw", paddingTop: "8vh", flex: "flex-wrap",}}>
       
-        <Carousel cols={1} rows={1} gap={1} loop>
-          <Carousel.Item >
-          <SmallGame key="5" item={items[0]} />
-          </Carousel.Item>
-          {/* {games.map((game) => (
-            <Carousel.Item key={game.id}>
-              <section style={{justifyContent: "center", display: 'flex', alignItems: 'center'}}> 
-                <img src={game.imageUrl} alt={game.title} />
-                <p>{game.title}</p>
-              </section>              
-            </Carousel.Item>
-          ))} */}
+    //     <Carousel cols={1} rows={1} gap={1} loop>
+    //       {items.map((item) => (
+    //         <Carousel.Item key={item.id}>
+    //           <Card>
+    //             <CardCover>
+    //               <img src={item.thumbnail}></img>
+    //             </CardCover>
+    //           </Card>
+    //         </Carousel.Item>
+    //       ))}
+    //   </Carousel>
+    // </Box> 
+    
+      <Card >
+    <CardCover>
+      <img src={"https://www.freetogame.com/g/508/thumbnail.jpg"}></img>
 
-      </Carousel>
-    </Box> 
+    </CardCover>
+    </Card>
     
   );
 };
