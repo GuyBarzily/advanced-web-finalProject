@@ -21,6 +21,7 @@ function Games() {
       developer: "Darkflow Software",
       release_date: "2021-04-08",
       freetogame_profile_url: "https://www.freetogame.com/enlisted",
+      price: "10$",
     },
     {
       id: 516,
@@ -35,6 +36,7 @@ function Games() {
       developer: "KRAFTON, Inc.",
       release_date: "2022-01-12",
       freetogame_profile_url: "https://www.freetogame.com/pubg",
+      price: "10$",
     },
     {
       id: 540,
@@ -49,6 +51,7 @@ function Games() {
       developer: "Blizzard Entertainment",
       release_date: "2022-10-04",
       freetogame_profile_url: "https://www.freetogame.com/overwatch-2",
+      price: "free",
     },
     {
       id: 521,
@@ -63,6 +66,7 @@ function Games() {
       developer: "Blizzard Entertainment",
       release_date: "2022-06-02",
       freetogame_profile_url: "https://www.freetogame.com/diablo-immortal",
+      price: "20$",
     },
     {
       id: 517,
@@ -77,6 +81,7 @@ function Games() {
       developer: "Smilegate RPG",
       release_date: "2022-02-11",
       freetogame_profile_url: "https://www.freetogame.com/lost-ark",
+      price: "10$",
     },
   ];
 

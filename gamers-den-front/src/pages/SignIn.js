@@ -17,9 +17,9 @@ import {
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
-import { auth } from "./firebase";
+import { auth } from "../firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import Copyright from "./components/Copyright";
+import Copyright from "../components/Copyright";
 
 const theme = createTheme();
 
