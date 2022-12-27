@@ -11,11 +11,14 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { Badge, TextField } from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { useNavigate } from "react-router-dom";
 
 function AppBarComponent() {
   const [logedIn, setLogedIn] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const [cartValue, setCartValue] = useState(2);
+  const navigate = useNavigate();
+
   const [search, setSearch] = useState("");
   const open = Boolean(anchorEl);
   const openMenuHandle = (event) => {
@@ -24,6 +27,9 @@ function AppBarComponent() {
 
   const handleClose = (event) => {
     console.log(event.currentTarget.id);
+    if (event.currentTarget.id === "logIn") {
+      navigate("/sign-in");
+    }
     setAnchorEl(null);
   };
 
@@ -33,7 +39,7 @@ function AppBarComponent() {
   };
 
   return (
-    <Box sx={{ flexGrow: 1 ,paddingBottom: "2vh"}}>
+    <Box sx={{ flexGrow: 1, paddingBottom: "2vh" }}>
       <AppBar
         position="static"
         sx={{
