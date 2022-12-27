@@ -42,6 +42,7 @@ function SmallGame(props) {
       <Card
         sx={{
           margin: "1vw",
+          borderRadius: "15px",
         }}
       >
         <CardMedia

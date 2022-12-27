@@ -1,16 +1,21 @@
 import AppBarComponent from "../components/AppBar";
 import MainGameComp from "../components/MainGameComp";
-import MainSortBar from "../components/MainSortBar";
 import Games from "../components/Games";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import Copyright from "../components/Copyright";
 
-function Home() {
+function Home(props) {
+  const [cart, setCart] = useState([{ name: "guy" }]);
   return (
     <div style={{ backgroundColor: "#DDDDDD" }}>
-      <AppBarComponent />
+      <AppBarComponent
+        user={props.user}
+        cart={cart.length}
+        setUser={props.setUser}
+      />
       <MainGameComp />
-      {/* <MainSortBar /> */}
       <Games />
+      <Copyright />
     </div>
   );
 }
