@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -7,16 +7,18 @@ import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import Avatar from "@mui/material/Avatar";
+
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { Badge, TextField } from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { useNavigate } from "react-router-dom";
 
-function AppBarComponent() {
-  const [logedIn, setLogedIn] = useState(false);
+function AppBarComponent(props) {
+  const [user, setUser] = useState(null);
   const [anchorEl, setAnchorEl] = useState(null);
-  const [cartValue, setCartValue] = useState(2);
+  const [cartValue, setCartValue] = useState(0);
   const navigate = useNavigate();
 
   const [search, setSearch] = useState("");
@@ -26,9 +28,12 @@ function AppBarComponent() {
   };
 
   const handleClose = (event) => {
-    console.log(event.currentTarget.id);
-    if (event.currentTarget.id === "logIn") {
+    const id = event.currentTarget.id;
+    if (id === "logIn") {
       navigate("/sign-in");
+    } else if (id === "logOut") {
+      props.setUser(null);
+      setUser(null);
     }
     setAnchorEl(null);
   };
@@ -37,6 +42,15 @@ function AppBarComponent() {
     console.log(search);
     setSearch("");
   };
+
+  const handleShopingCartClick = () => {
+    console.log("shoping cart pressed");
+  };
+
+  useEffect(() => {
+    setUser(props.user);
+    setCartValue(props.cart);
+  }, [props.user]);
 
   return (
     <Box sx={{ flexGrow: 1, paddingBottom: "2vh" }}>
@@ -87,14 +101,13 @@ function AppBarComponent() {
             Submit
           </Button>
 
-          {/* <TextField
-            style={{ alignSelf: "center", outlineColor: "white" }}
-            placeholder="search"
-          ></TextField> */}
-          {!logedIn && (
+          {user && (
             <div style={{ paddingRight: "1vw", paddingLeft: "1vw" }}>
               <Badge color="secondary" badgeContent={cartValue}>
-                <ShoppingCartIcon />
+                <ShoppingCartIcon
+                  sx={{ cursor: "pointer" }}
+                  onClick={handleShopingCartClick}
+                />
               </Badge>
             </div>
           )}
@@ -106,7 +119,20 @@ function AppBarComponent() {
             color="inherit"
             onClick={openMenuHandle}
           >
-            <AccountCircleIcon fontSize="large" />
+            {user && (
+              <Avatar
+                alt={user.email}
+                src="/static/images/avatar/2.jpg"
+                fontSize="large"
+              />
+            )}
+            {!user && (
+              <Avatar
+                alt=""
+                src="/static/images/avatar/2.jpg"
+                fontSize="large"
+              />
+            )}
           </Button>
           <Menu
             id="basic-menu"
@@ -123,9 +149,16 @@ function AppBarComponent() {
             <MenuItem id="acount" onClick={handleClose}>
               My account
             </MenuItem>
-            <MenuItem id="logIn" onClick={handleClose}>
-              {!logedIn ? "Log In" : "Log Out"}
-            </MenuItem>
+            {user && (
+              <MenuItem id="logOut" onClick={handleClose}>
+                Log Out
+              </MenuItem>
+            )}
+            {!user && (
+              <MenuItem id="logIn" onClick={handleClose}>
+                Log In
+              </MenuItem>
+            )}
           </Menu>
         </Toolbar>
       </AppBar>

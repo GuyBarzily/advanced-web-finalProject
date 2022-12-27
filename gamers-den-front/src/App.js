@@ -6,10 +6,7 @@ import SignUp from "./SignUp";
 function App() {
   const [user, setUser] = useState(null);
 
-  useEffect(() => {
-    console.log(user);
-    if (user) console.log("user &: " + user);
-  }, [user]);
+  useEffect(() => {}, [user]);
   return (
     <Router>
       <Routes>
