@@ -33,7 +33,13 @@ function MainGameComp() {
     },
   ];
   
-  return <Box sx={{width:"50vw", height: "50vh",justifyContent: "center",alignItems: 'center'}}>
+  return <Box sx={{ flexDirection: "row",
+  display: "flex",
+  p: 1,
+  m: 1,
+  borderRadius: 1,
+  flexWrap: "wrap",
+  justifyContent: "center",}}>
     
     <GameCarousel games ={games}>
       

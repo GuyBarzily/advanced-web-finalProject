@@ -6,6 +6,7 @@ import Carousel from 'better-react-carousel';
 import Box from '@mui/joy/Box';
 import Card from '@mui/joy/Card';
 import CardCover from '@mui/joy/CardCover';
+import JoyCard from './JoyCard';
 
 
 const GameCarousel = (props) => {
@@ -64,12 +65,25 @@ const GameCarousel = (props) => {
     //   </Carousel>
     // </Box> 
     
-      <Card >
-    <CardCover>
-      <img src={"https://www.freetogame.com/g/508/thumbnail.jpg"}></img>
+    //   <Card >
+    // <CardCover>
+    //   <img src={"https://www.freetogame.com/g/508/thumbnail.jpg"}></img>
+      
+    // </CardCover>
+    // </Card>
+    <Carousel cols={1} rows={1} gap={1} loop>
+      <Carousel.Item >
+        <JoyCard>
 
-    </CardCover>
-    </Card>
+        </JoyCard>
+      </Carousel.Item>
+      <Carousel.Item >
+        <JoyCard>
+
+        </JoyCard>
+      </Carousel.Item>
+    </Carousel>
+    
 
     
   );

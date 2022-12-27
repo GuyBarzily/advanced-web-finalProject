@@ -33,9 +33,9 @@ function AppBarComponent() {
   };
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box sx={{ flexGrow: 1 ,paddingBottom: "2vh"}}>
       <AppBar
-        position="absolute"
+        position="static"
         sx={{
           background:
             "linear-gradient(90deg, rgba(32,32,32,1) 0%, rgba(40,40,59,1) 61%, rgba(32,32,32,1) 100%);",
