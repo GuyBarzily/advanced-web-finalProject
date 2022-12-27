@@ -6,13 +6,14 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import LoginIcon from "@mui/icons-material/Login";
 import Avatar from "@mui/material/Avatar";
-
+import LogoutIcon from "@mui/icons-material/Logout";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import { Badge, TextField } from "@mui/material";
+import { Badge } from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import SearchIcon from "@mui/icons-material/Search";
 import { useNavigate } from "react-router-dom";
 
 function AppBarComponent(props) {
@@ -53,9 +54,9 @@ function AppBarComponent(props) {
   }, [props.user]);
 
   return (
-    <Box sx={{ flexGrow: 1, paddingBottom: "2vh" }}>
+    <Box sx={{ flexGrow: 1, paddingBottom: "10vh" }}>
       <AppBar
-        position="static"
+        position="fixed"
         sx={{
           background:
             "linear-gradient(90deg, rgba(32,32,32,1) 0%, rgba(40,40,59,1) 61%, rgba(32,32,32,1) 100%);",
@@ -74,7 +75,7 @@ function AppBarComponent(props) {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             The Gamers Den
           </Typography>
-          <div style={{ paddingRight: "1vw" }}>
+          <div style={{}}>
             <input
               style={{
                 borderRadius: "10px",
@@ -93,12 +94,12 @@ function AppBarComponent(props) {
             size="small"
             sx={{
               color: "white",
-              border: 1,
+              // border: 1,
               borderRadius: "10px",
             }}
             onClick={handleSearch}
           >
-            Submit
+            <SearchIcon />
           </Button>
 
           {user && (
@@ -143,20 +144,15 @@ function AppBarComponent(props) {
               "aria-labelledby": "basic-button",
             }}
           >
-            <MenuItem id="profile" onClick={handleClose}>
-              Profile
-            </MenuItem>
-            <MenuItem id="acount" onClick={handleClose}>
-              My account
-            </MenuItem>
             {user && (
               <MenuItem id="logOut" onClick={handleClose}>
-                Log Out
+                {"Log Out"}
+                <LogoutIcon sx={{ marginLeft: 1 }} />
               </MenuItem>
             )}
             {!user && (
               <MenuItem id="logIn" onClick={handleClose}>
-                Log In
+                {"Log In"} <LoginIcon sx={{ marginLeft: 1 }} />
               </MenuItem>
             )}
           </Menu>
