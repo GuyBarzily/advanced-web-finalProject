@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -13,6 +13,10 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "./firebase";
+import CircularProgress from "@mui/material/CircularProgress";
+import Circular from "./components/Circular";
 
 function Copyright(props) {
   return (
@@ -34,18 +38,39 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-const SignUp = () => {
+const SignUp = (props) => {
   const navigate = useNavigate();
-
+  const [loading, setLoading] = useState(false);
   const handleSubmit = (event) => {
+    setLoading(true);
+    console.log("submit");
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     console.log({
       email: data.get("email"),
       password: data.get("password"),
     });
+    createUserWithEmailAndPassword(
+      auth,
+      data.get("email"),
+      data.get("password")
+    )
+      .then((userCredential) => {
+        const user = userCredential.user;
+        console.log(user);
+        props.setUser(user);
+        navigate("/");
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode);
+      });
+    setLoading(false);
   };
-
+  if (loading) {
+    return <Circular />;
+  }
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">

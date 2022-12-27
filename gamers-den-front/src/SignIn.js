@@ -1,4 +1,4 @@
-import * as React from "react";
+import { useState } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -13,6 +13,9 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
+import { auth } from "./firebase";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import CircularProgress from "@mui/material/CircularProgress";
 
 function Copyright(props) {
   return (
@@ -34,17 +37,36 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-const SignIn = () => {
+const SignIn = (props) => {
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
-    navigate("/");
+    authenticate(data.get("email"), data.get("password"));
   };
+
+  const authenticate = (email, password) => {
+    setLoading(true);
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        console.log(user);
+        props.setUser(user);
+        navigate("/");
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode);
+      });
+
+    setLoading(false);
+  };
+
+  if (loading) {
+    return <CircularProgress />;
+  }
 
   return (
     <ThemeProvider theme={theme}>
