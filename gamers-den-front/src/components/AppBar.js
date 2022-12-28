@@ -45,7 +45,7 @@ function AppBarComponent(props) {
   };
 
   const handleShopingCartClick = () => {
-    console.log("shoping cart pressed");
+    navigate("/cart");
   };
 
   useEffect(() => {
@@ -63,16 +63,12 @@ function AppBarComponent(props) {
         }}
       >
         <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
+          <Typography
+            variant="h6"
+            component="div"
+            sx={{ flexGrow: 1, cursor: "pointer" }}
+            onClick={() => navigate("/")}
           >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             The Gamers Den
           </Typography>
           <div style={{}}>

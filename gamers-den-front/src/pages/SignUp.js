@@ -11,9 +11,9 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "./firebase";
-import Circular from "./components/Circular";
-import Copyright from "./components/Copyright";
+import { auth } from "../firebase";
+import Circular from "../components/Circular";
+import Copyright from "../components/Copyright";
 
 const theme = createTheme();
 
