@@ -12,20 +12,17 @@ const style = {
   transform: "translate(-50%, -50%)",
   bgcolor: "background.paper",
   border: "2px solid #000",
+  borderRadius: "30px",
   boxShadow: 24,
   p: 4,
 };
 
 function GameModal(props) {
-  const [game, setGame] = useState("");
   const handleClose = () => {
-    //setOpen(false);
     props.setClose();
   };
 
-  useEffect(() => {
-    setGame(props.game);
-  }, [props.open]);
+  useEffect(() => {}, [props.open]);
 
   return (
     <div>

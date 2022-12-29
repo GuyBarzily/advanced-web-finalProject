@@ -5,27 +5,16 @@ import Admin from "./pages/Admin";
 import Home from "./pages/Home";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
-import { getGames } from "./axios";
 
 function App() {
   const [user, setUser] = useState(null);
   const [isAdmin, setIsAdmin] = useState(true);
-  const [data, setData] = useState([]);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const games = await getGames();
-      setData(games);
-    };
-    fetchData();
-  }, [user]);
+  useEffect(() => {}, [user]);
   return (
     <Router>
       <Routes>
-        <Route
-          path="/"
-          element={<Home user={user} setUser={setUser} games={data} />}
-        />
+        <Route path="/" element={<Home user={user} setUser={setUser} />} />
         <Route
           path="/sign-in"
           element={<SignIn user={user} setUser={setUser} />}
