@@ -30,9 +30,6 @@ function Games(props) {
         sx={{
           flexDirection: "row",
           display: "flex",
-          p: 1,
-          m: 1,
-          borderRadius: 1,
           flexWrap: "wrap",
           justifyContent: "center",
         }}
