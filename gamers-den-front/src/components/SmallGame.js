@@ -12,7 +12,7 @@ import {
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 
 function SmallGame(props) {
-  const [value, setValue] = useState(2);
+  const [value, setValue] = useState(0);
   const [item, setItem] = useState("");
   const [addAlert, setAddAlert] = useState(false);
   const [faildAlert, setFailedAlert] = useState(false);
@@ -35,6 +35,7 @@ function SmallGame(props) {
 
   useEffect(() => {
     setItem(props.item);
+    setValue(props.item.rating);
   }, [props.item]);
 
   return (
@@ -53,15 +54,29 @@ function SmallGame(props) {
           onClick={handleClick}
         />
         <CardContent>
-          <Typography
-            onClick={handleClick}
-            gutterBottom
-            variant="h5"
-            component="div"
-            sx={{ cursor: "pointer" }}
-          >
-            {item.title}
-          </Typography>
+          {item.title.length > 20 && (
+            <Typography
+              onClick={handleClick}
+              gutterBottom
+              variant="h6"
+              component="div"
+              sx={{ cursor: "pointer" }}
+            >
+              {item.title}
+            </Typography>
+          )}
+          {item.title.length <= 20 && (
+            <Typography
+              onClick={handleClick}
+              gutterBottom
+              variant="h5"
+              component="div"
+              sx={{ cursor: "pointer" }}
+            >
+              {item.title}
+            </Typography>
+          )}
+
           <Typography variant="body2" color="text.secondary">
             {"Release date: " + item.release_date}
           </Typography>
@@ -69,7 +84,7 @@ function SmallGame(props) {
             {"Genre: " + item.genre}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            {"Price: " + item.price}
+            {"Price: " + item.price + "$"}
           </Typography>
         </CardContent>
         <CardActions>
@@ -81,9 +96,7 @@ function SmallGame(props) {
             sx={{ paddingLeft: "1vw" }}
             name="simple-controlled"
             value={value}
-            onChange={(event, newValue) => {
-              setValue(newValue);
-            }}
+            readOnly
           />
         </CardActions>
       </Card>
