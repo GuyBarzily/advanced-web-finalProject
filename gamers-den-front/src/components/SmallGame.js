@@ -86,6 +86,9 @@ function SmallGame(props) {
           <Typography variant="body2" color="text.secondary">
             {"Price: " + item.price + "$"}
           </Typography>
+          <Typography variant="body2" color="text.secondary">
+            {"platform: " + item.platform}
+          </Typography>
         </CardContent>
         <CardActions>
           <AddShoppingCartIcon

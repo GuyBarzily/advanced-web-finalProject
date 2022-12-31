@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import GameModal from "./GameModal";
 import GamesTitle from "./GamesTitle";
 import SmallGame from "./SmallGame";
+import Circular from "./Circular";
 
 function Games(props) {
   const [openGame, setOpenGame] = useState(false);
@@ -18,13 +19,16 @@ function Games(props) {
   };
 
   useEffect(() => {
-    console.log(Object.values(props.games)[0]);
     setItems(Object.values(props.games));
   }, [props.games]);
 
   return (
     <div style={{ marginTop: "5vh" }}>
-      <GamesTitle />
+      <GamesTitle
+        setSortGenre={props.setSortGenre}
+        setSortPlatform={props.setSortPlatform}
+        setNameSearch={props.setNameSearch}
+      />
       <GameModal open={openGame} setClose={closeModal} game={modalItem} />
       <Box
         sx={{
@@ -34,9 +38,11 @@ function Games(props) {
           justifyContent: "center",
         }}
       >
-        {items.map((game, index) => {
-          return <SmallGame key={index} item={game} onClick={openModal} />;
-        })}
+        {!props.loading &&
+          items.map((game, index) => {
+            return <SmallGame key={index} item={game} onClick={openModal} />;
+          })}
+        {props.loading && <Circular />}
       </Box>
     </div>
   );

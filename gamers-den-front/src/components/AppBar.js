@@ -66,37 +66,11 @@ function AppBarComponent(props) {
           <Typography
             variant="h6"
             component="div"
-            sx={{ flexGrow: 1, cursor: "pointer" }}
+            sx={{ flexGrow: 1 }}
             onClick={() => navigate("/")}
           >
             The Gamers Den
           </Typography>
-          <div style={{}}>
-            <input
-              style={{
-                borderRadius: "10px",
-                height: "3vh",
-              }}
-              type="text"
-              id="lname"
-              name="lname"
-              placeholder="Search"
-              onChange={(e) => {
-                setSearch(e.target.value);
-              }}
-            />
-          </div>
-          <Button
-            size="small"
-            sx={{
-              color: "white",
-              // border: 1,
-              borderRadius: "10px",
-            }}
-            onClick={handleSearch}
-          >
-            <SearchIcon />
-          </Button>
 
           {user && (
             <div style={{ paddingRight: "1vw", paddingLeft: "1vw" }}>
