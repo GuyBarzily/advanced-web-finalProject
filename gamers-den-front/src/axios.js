@@ -17,3 +17,14 @@ export const gameByName = async (name) => {
   const games = await axios.post("http://localhost:8080/gameName", name);
   return games.data;
 };
+
+export const addUser = async (data) => {
+  const user = await axios.post("http://localhost:8080/addUser", data);
+  return user.data;
+};
+
+export const getUser = async (userId) => {
+  const data = { _id: userId };
+  const user = await axios.post("http://localhost:8080/getUser", data);
+  return user.data;
+};

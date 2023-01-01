@@ -21,6 +21,7 @@ import { auth } from "../firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import Copyright from "../components/Copyright";
 import Circular from "../components/Circular";
+import { getUser } from "../axios";
 
 const theme = createTheme();
 
@@ -50,9 +51,14 @@ const SignIn = (props) => {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
-        console.log(user);
-        props.setUser(user);
-        navigate("/");
+        const getdata = async () => {
+          const data = await getUser(user.uid);
+          console.log(data);
+
+          props.setUser(data);
+          navigate("/");
+        };
+        getdata();
       })
       .catch((error) => {
         const errorCode = error.code;
