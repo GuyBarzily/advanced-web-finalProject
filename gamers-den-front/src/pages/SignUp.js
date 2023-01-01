@@ -14,6 +14,8 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
 import Circular from "../components/Circular";
 import Copyright from "../components/Copyright";
+import { async } from "@firebase/util";
+import { addUser } from "../axios";
 
 const theme = createTheme();
 
@@ -36,6 +38,7 @@ const SignUp = (props) => {
     setLoading(true);
     event.preventDefault();
     const data = new FormData(event.currentTarget);
+
     createUserWithEmailAndPassword(
       auth,
       data.get("email"),
@@ -44,8 +47,22 @@ const SignUp = (props) => {
       .then((userCredential) => {
         const user = userCredential.user;
         console.log(user);
-        props.setUser(user);
-        navigate("/");
+        const fullData = {
+          _id: user.uid,
+          email: data.get("email"),
+          firstName: data.get("firstName"),
+          lastName: data.get("lastName"),
+          isAdmin: false,
+          cart: [],
+        };
+        console.log(fullData);
+        const saveData = async () => {
+          const data = await addUser(fullData);
+          props.setUser(data);
+          navigate("/");
+        };
+        saveData();
+        //  props.setUser(fullData);
       })
       .catch((error) => {
         const errorCode = error.code;
