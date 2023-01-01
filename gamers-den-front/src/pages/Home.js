@@ -35,7 +35,7 @@ function Home(props) {
 
   return (
     <div style={{ minHeight: "100vh", backgroundColor: "#DDDDDD" }}>
-      <AppBarComponent user={props.user} cart="2" setUser={props.setUser} />
+      <AppBarComponent user={props.user} setUser={props.setUser} />
       <MainGameComp />
       <Games
         games={data}

@@ -6,7 +6,7 @@ import StickyFooter from "./Footer";
 function Cart(props) {
   return (
     <div>
-      <AppBarComponent user={{ email: "guy" }} />
+      <AppBarComponent user={props.user} setUser={props.setUser} />
       <Box
         sx={{
           minHeight: "90vh",

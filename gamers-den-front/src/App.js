@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import CannotReach from "./components/CannotReach";
 import Cart from "./components/Cart";
 import Admin from "./pages/Admin";
 import Home from "./pages/Home";
@@ -8,9 +9,12 @@ import SignUp from "./pages/SignUp";
 
 function App() {
   const [user, setUser] = useState(null);
-  const [isAdmin, setIsAdmin] = useState(true);
 
-  useEffect(() => {}, [user]);
+  useEffect(() => {
+    if (user) {
+      console.log(user.isAdmin);
+    }
+  }, []);
   return (
     <Router>
       <Routes>
@@ -23,8 +27,12 @@ function App() {
           path="/sign-up"
           element={<SignUp user={user} setUser={setUser} />}
         />
-        <Route path="/cart" element={<Cart />} />
-        {isAdmin && <Route path="/admin" element={<Admin />} />}
+        <Route path="/cart" element={<Cart user={user} setUser={setUser} />} />
+
+        <Route
+          path="/admin"
+          element={user ? <Admin user={user} /> : <CannotReach />}
+        />
       </Routes>
     </Router>
   );

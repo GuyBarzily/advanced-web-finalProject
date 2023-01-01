@@ -12,7 +12,6 @@ import {
   CssBaseline,
   Grid,
   Typography,
-  CircularProgress,
 } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -53,15 +52,12 @@ const SignIn = (props) => {
         const user = userCredential.user;
         const getdata = async () => {
           const data = await getUser(user.uid);
-          console.log(data);
-
           props.setUser(data);
           navigate("/");
         };
         getdata();
       })
       .catch((error) => {
-        const errorCode = error.code;
         const errorMessage = error.message;
 
         handleError(errorMessage);
