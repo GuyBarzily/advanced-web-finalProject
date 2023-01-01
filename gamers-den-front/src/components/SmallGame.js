@@ -54,7 +54,7 @@ function SmallGame(props) {
           onClick={handleClick}
         />
         <CardContent>
-          {item.title.length > 20 && (
+          {item && item.title.length > 20 && (
             <Typography
               onClick={handleClick}
               gutterBottom
@@ -65,7 +65,7 @@ function SmallGame(props) {
               {item.title}
             </Typography>
           )}
-          {item.title.length <= 20 && (
+          {item && item.title.length <= 20 && (
             <Typography
               onClick={handleClick}
               gutterBottom
@@ -85,6 +85,9 @@ function SmallGame(props) {
           </Typography>
           <Typography variant="body2" color="text.secondary">
             {"Price: " + item.price + "$"}
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            {"platform: " + item.platform}
           </Typography>
         </CardContent>
         <CardActions>

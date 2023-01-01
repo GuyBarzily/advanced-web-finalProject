@@ -1,8 +1,9 @@
-import { Box, Alert } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import GameModal from "./GameModal";
 import GamesTitle from "./GamesTitle";
 import SmallGame from "./SmallGame";
+import Circular from "./Circular";
 
 function Games(props) {
   const [openGame, setOpenGame] = useState(false);
@@ -18,13 +19,38 @@ function Games(props) {
   };
 
   useEffect(() => {
-    console.log(Object.values(props.games)[0]);
     setItems(Object.values(props.games));
   }, [props.games]);
 
   return (
-    <div style={{ marginTop: "5vh" }}>
-      <GamesTitle />
+    <div
+      style={{
+        marginTop: "5vh",
+        alignContent: "center",
+        alignItems: "center",
+        display: "flex",
+        flexDirection: "column",
+      }}
+    >
+      <Typography
+        variant="h3"
+        style={{
+          paddingBottom: "4vw",
+          fontFamily: "Raleway",
+          cursor: "pointer",
+        }}
+        onClick={() => {
+          props.getAll();
+        }}
+      >
+        Our Games
+      </Typography>
+      <GamesTitle
+        getBySort={props.getBySort}
+        setSortGenre={props.setSortGenre}
+        setSortPlatform={props.setSortPlatform}
+        getByName={props.getByName}
+      />
       <GameModal open={openGame} setClose={closeModal} game={modalItem} />
       <Box
         sx={{
@@ -34,9 +60,11 @@ function Games(props) {
           justifyContent: "center",
         }}
       >
-        {items.map((game, index) => {
-          return <SmallGame key={index} item={game} onClick={openModal} />;
-        })}
+        {!props.loading &&
+          items.map((game, index) => {
+            return <SmallGame key={index} item={game} onClick={openModal} />;
+          })}
+        {props.loading && <Circular />}
       </Box>
     </div>
   );

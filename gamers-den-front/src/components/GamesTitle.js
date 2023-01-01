@@ -1,42 +1,76 @@
-import React, { useState } from "react";
-import Box from "@mui/material/Box";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
-import { Typography } from "@mui/material";
+import React, { useEffect, useState } from "react";
+import { Box, InputLabel, MenuItem, FormControl, Select } from "@mui/material";
+import SearchInput from "./SearchInput";
 
-function GamesTitle() {
-  const [sortBy, setSortBy] = useState("Featured");
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+  PaperProps: {
+    style: {
+      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+      width: 250,
+    },
+  },
+};
 
-  const handleChange = (event) => {
-    setSortBy(event.target.value);
+function GamesTitle(props) {
+  const [genreSort, setGenreSort] = useState("All");
+  const [platformSort, setPlatformSort] = useState("All");
+
+  const handleChangeGenre = (event) => {
+    setGenreSort(event.target.value);
+    props.getBySort(event.target.value, platformSort);
   };
+
+  const handleChangePlatfrom = (event) => {
+    setPlatformSort(event.target.value);
+    props.getBySort(genreSort, event.target.value);
+  };
+
+  useEffect(() => {}, []);
   return (
     <Box
       sx={{
         display: "inline-flex",
-        justifyContent: "space-between",
-        width: "80vw",
+        justifyContent: "space-around",
+        width: "90vw",
         paddingLeft: "2vw",
       }}
     >
-      <Typography variant="h4" style={{ marginLeft: "10vw" }}>
-        Games by {sortBy}
-      </Typography>
-      <Box sx={{ minWidth: "10vw" }}>
+      <SearchInput getByName={props.getByName} />
+      <Box sx={{ minWidth: "20vw", display: "flex" }}>
         <FormControl fullWidth>
-          <InputLabel id="sort-select">Sort</InputLabel>
+          <InputLabel id="sort-genre">By Genre</InputLabel>
+          <Select
+            labelId="select-genre"
+            id="sort-genre"
+            value={genreSort}
+            label="By Genre"
+            onChange={handleChangeGenre}
+            MenuProps={MenuProps}
+          >
+            <MenuItem value={"All"}>All</MenuItem>
+            <MenuItem value={"Shooter"}>Shooter</MenuItem>
+            <MenuItem value={"Strategy"}>Strategy</MenuItem>
+            <MenuItem value={"Action RPG"}>Action RPG</MenuItem>
+            <MenuItem value={"Battle Royale"}>Battle Royale</MenuItem>
+            <MenuItem value={"MMOARPG"}>MMOARPG</MenuItem>
+            <MenuItem value={"Fighting"}>Fighting</MenuItem>
+          </Select>
+        </FormControl>
+        <FormControl fullWidth>
+          <InputLabel id="sort-plattform">By Plattform</InputLabel>
           <Select
             labelId="demo-simple-select-label"
             id="sort-select"
-            value={sortBy}
-            label="Sort"
-            onChange={handleChange}
+            value={platformSort}
+            label="By Genre"
+            onChange={handleChangePlatfrom}
+            MenuProps={MenuProps}
           >
-            <MenuItem value={"Featured"}>Featured</MenuItem>
-            <MenuItem value={"Release Date"}>Release Date</MenuItem>
-            <MenuItem value={"Popularity"}>Popularity</MenuItem>
+            <MenuItem value={"All"}>All</MenuItem>
+            <MenuItem value={"PC (Windows)"}>PC (Windows)</MenuItem>
+            <MenuItem value={"Web Browser"}>Web Browser</MenuItem>
           </Select>
         </FormControl>
       </Box>

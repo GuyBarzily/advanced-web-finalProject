@@ -4,8 +4,6 @@ import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
 import LoginIcon from "@mui/icons-material/Login";
 import Avatar from "@mui/material/Avatar";
 import LogoutIcon from "@mui/icons-material/Logout";
@@ -13,7 +11,6 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { Badge } from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import SearchIcon from "@mui/icons-material/Search";
 import { useNavigate } from "react-router-dom";
 
 function AppBarComponent(props) {
@@ -21,8 +18,6 @@ function AppBarComponent(props) {
   const [anchorEl, setAnchorEl] = useState(null);
   const [cartValue, setCartValue] = useState(0);
   const navigate = useNavigate();
-
-  const [search, setSearch] = useState("");
   const open = Boolean(anchorEl);
   const openMenuHandle = (event) => {
     setAnchorEl(event.currentTarget);
@@ -39,11 +34,6 @@ function AppBarComponent(props) {
     setAnchorEl(null);
   };
 
-  const handleSearch = () => {
-    console.log(search);
-    setSearch("");
-  };
-
   const handleShopingCartClick = () => {
     navigate("/cart");
   };
@@ -51,7 +41,7 @@ function AppBarComponent(props) {
   useEffect(() => {
     setUser(props.user);
     setCartValue(props.cart);
-  }, [props.user]);
+  }, [props.user, props.cart]);
 
   return (
     <Box sx={{ flexGrow: 1, paddingBottom: "10vh" }}>
@@ -64,39 +54,13 @@ function AppBarComponent(props) {
       >
         <Toolbar>
           <Typography
-            variant="h6"
+            variant="h5"
             component="div"
-            sx={{ flexGrow: 1, cursor: "pointer" }}
+            sx={{ flexGrow: 1, fontFamily: "Raleway" }}
             onClick={() => navigate("/")}
           >
             The Gamers Den
           </Typography>
-          <div style={{}}>
-            <input
-              style={{
-                borderRadius: "10px",
-                height: "3vh",
-              }}
-              type="text"
-              id="lname"
-              name="lname"
-              placeholder="Search"
-              onChange={(e) => {
-                setSearch(e.target.value);
-              }}
-            />
-          </div>
-          <Button
-            size="small"
-            sx={{
-              color: "white",
-              // border: 1,
-              borderRadius: "10px",
-            }}
-            onClick={handleSearch}
-          >
-            <SearchIcon />
-          </Button>
 
           {user && (
             <div style={{ paddingRight: "1vw", paddingLeft: "1vw" }}>

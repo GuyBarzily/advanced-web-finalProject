@@ -20,6 +20,8 @@ import { useNavigate } from "react-router-dom";
 import { auth } from "../firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import Copyright from "../components/Copyright";
+import Circular from "../components/Circular";
+import { getUser } from "../axios";
 
 const theme = createTheme();
 
@@ -49,9 +51,14 @@ const SignIn = (props) => {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
-        console.log(user);
-        props.setUser(user);
-        navigate("/");
+        const getdata = async () => {
+          const data = await getUser(user.uid);
+          console.log(data);
+
+          props.setUser(data);
+          navigate("/");
+        };
+        getdata();
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -60,12 +67,10 @@ const SignIn = (props) => {
         handleError(errorMessage);
       });
 
-    setLoading(false);
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000);
   };
-
-  if (loading) {
-    return <CircularProgress />;
-  }
 
   return (
     <ThemeProvider theme={theme}>
@@ -88,6 +93,7 @@ const SignIn = (props) => {
             backgroundPosition: "center",
           }}
         />
+
         <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
           <Box
             sx={{
@@ -97,6 +103,7 @@ const SignIn = (props) => {
               alignItems: "center",
             }}
           >
+            {loading && <Circular />}
             <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
               <LockOutlinedIcon />
             </Avatar>
