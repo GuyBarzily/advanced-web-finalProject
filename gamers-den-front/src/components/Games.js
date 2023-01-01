@@ -1,4 +1,4 @@
-import { Box, Alert } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import GameModal from "./GameModal";
 import GamesTitle from "./GamesTitle";
@@ -23,11 +23,33 @@ function Games(props) {
   }, [props.games]);
 
   return (
-    <div style={{ marginTop: "5vh" }}>
+    <div
+      style={{
+        marginTop: "5vh",
+        alignContent: "center",
+        alignItems: "center",
+        display: "flex",
+        flexDirection: "column",
+      }}
+    >
+      <Typography
+        variant="h3"
+        style={{
+          paddingBottom: "4vw",
+          fontFamily: "Raleway",
+          cursor: "pointer",
+        }}
+        onClick={() => {
+          props.getAll();
+        }}
+      >
+        Our Games
+      </Typography>
       <GamesTitle
+        getBySort={props.getBySort}
         setSortGenre={props.setSortGenre}
         setSortPlatform={props.setSortPlatform}
-        setNameSearch={props.setNameSearch}
+        getByName={props.getByName}
       />
       <GameModal open={openGame} setClose={closeModal} game={modalItem} />
       <Box

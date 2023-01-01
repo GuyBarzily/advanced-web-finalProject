@@ -1,18 +1,18 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { Paper, IconButton, InputBase } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 
 function SearchInput(props) {
-  const searchRef = useRef("Search Game");
+  const [search, setSearch] = useState("");
   const handleSearch = (event) => {
-    searchRef.current = event.target.value;
+    setSearch(event.target.value);
   };
 
   const submitSearch = (event) => {
     event.preventDefault();
-    props.setNameSearch(searchRef.current);
+    props.getByName(search);
 
-    searchRef.current = "";
+    setSearch("");
   };
   return (
     <Paper
@@ -25,11 +25,11 @@ function SearchInput(props) {
       }}
     >
       <InputBase
-        ref={searchRef}
         sx={{ ml: 1, flex: 1 }}
         placeholder="Search Games"
         inputProps={{ "aria-label": "search game" }}
         onChange={handleSearch}
+        value={search}
       />
       <IconButton
         type="submit"

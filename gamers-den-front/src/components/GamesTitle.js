@@ -1,12 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-  Typography,
-  Box,
-  InputLabel,
-  MenuItem,
-  FormControl,
-  Select,
-} from "@mui/material";
+import { Box, InputLabel, MenuItem, FormControl, Select } from "@mui/material";
 import SearchInput from "./SearchInput";
 
 const ITEM_HEIGHT = 48;
@@ -26,12 +19,12 @@ function GamesTitle(props) {
 
   const handleChangeGenre = (event) => {
     setGenreSort(event.target.value);
-    props.setSortGenre(event.target.value);
+    props.getBySort(event.target.value, platformSort);
   };
 
   const handleChangePlatfrom = (event) => {
     setPlatformSort(event.target.value);
-    props.setSortPlatform(event.target.value);
+    props.getBySort(genreSort, event.target.value);
   };
 
   useEffect(() => {}, []);
@@ -44,10 +37,7 @@ function GamesTitle(props) {
         paddingLeft: "2vw",
       }}
     >
-      <Typography variant="h4" style={{}}>
-        Games
-      </Typography>
-      <SearchInput setNameSearch={props.setNameSearch} />
+      <SearchInput getByName={props.getByName} />
       <Box sx={{ minWidth: "20vw", display: "flex" }}>
         <FormControl fullWidth>
           <InputLabel id="sort-genre">By Genre</InputLabel>
