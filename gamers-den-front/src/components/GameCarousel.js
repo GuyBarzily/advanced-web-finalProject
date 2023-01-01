@@ -47,7 +47,7 @@ const GameCarousel = (props) => {
 	]
 
 	return (
-		<div style={{ maxWidth: "45vw" }}>
+		<div style={{ width: "40vw", borderRadius: "20px" }}>
 			<Carousel cols={1} rows={1} gap={1} loop>
 				<Carousel.Item>
 					<JoyCard></JoyCard>
