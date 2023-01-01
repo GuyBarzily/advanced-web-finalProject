@@ -2,35 +2,12 @@ import React from "react"
 import Iframe from "react-iframe"
 import Box from "@mui/material/Box"
 import GameCarousel from "./GameCarousel"
+import { useEffect } from "react"
 
-function MainGameComp() {
-	const games = [
-		{
-			id: 1,
-			title: "Super Mario Bros.",
-			imageUrl: "https://www.freetogame.com/g/516/thumbnail.jpg",
-		},
-		{
-			id: 2,
-			title: "The Legend of Zelda",
-			imageUrl: "https://www.freetogame.com/g/516/thumbnail.jpg",
-		},
-		{
-			id: 3,
-			title: "Donkey Kong",
-			imageUrl: "https://www.freetogame.com/g/516/thumbnail.jpg",
-		},
-		{
-			id: 4,
-			title: "Pac-Man",
-			imageUrl: "https://www.freetogame.com/g/516/thumbnail.jpg",
-		},
-		{
-			id: 5,
-			title: "Tetris",
-			imageUrl: "https://www.freetogame.com/g/516/thumbnail.jpg",
-		},
-	]
+function MainGameComp(props) {
+	useEffect(() => {
+		console.log(props.user)
+	}, [])
 
 	return (
 		<Box
@@ -44,7 +21,7 @@ function MainGameComp() {
 				justifyContent: "center",
 			}}
 		>
-			<GameCarousel games={games}></GameCarousel>
+			<GameCarousel></GameCarousel>
 		</Box>
 	)
 }
