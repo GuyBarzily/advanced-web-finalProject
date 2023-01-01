@@ -47,38 +47,13 @@ const GameCarousel = (props) => {
 	]
 
 	return (
-		// <Box sx={{height:"50vh",width: "50vw",display:"flex",justifyContent: "center"
-		// ,alignContent:"center", paddingLeft: "25vw", paddingTop: "8vh", flex: "flex-wrap",}}>
-
-		//     <Carousel cols={1} rows={1} gap={1} loop>
-		//       {items.map((item) => (
-		//         <Carousel.Item key={item.id}>
-		//           <Card>
-		//             <CardCover>
-		//               <img src={item.thumbnail}></img>
-		//             </CardCover>
-		//           </Card>
-		//         </Carousel.Item>
-		//       ))}
-		//   </Carousel>
-		// </Box>
-
-		//   <Card >
-		// <CardCover>
-		//   <img src={"https://www.freetogame.com/g/508/thumbnail.jpg"}></img>
-
-		// </CardCover>
-		// </Card>
-		<Carousel cols={1} rows={1} gap={1} loop>
-			{/* <Carousel.Item>
-				<JoyCard game={items[0]}></JoyCard>
-			</Carousel.Item> */}
-			{items.map((item) => (
-				<Carousel.Item key={item.id}>
-					<JoyCard game={item}></JoyCard>
+		<div style={{ maxWidth: "45vw" }}>
+			<Carousel cols={1} rows={1} gap={1} loop>
+				<Carousel.Item>
+					<JoyCard></JoyCard>
 				</Carousel.Item>
-			))}
-		</Carousel>
+			</Carousel>
+		</div>
 	)
 }
 
