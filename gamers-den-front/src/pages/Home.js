@@ -1,53 +1,53 @@
-import AppBarComponent from "../components/AppBar";
-import MainGameComp from "../components/MainGameComp";
-import Games from "../components/Games";
-import React, { useEffect, useState } from "react";
-import StickyFooter from "../components/Footer";
-import { getGames, gameByName } from "../axios";
+import AppBarComponent from "../components/AppBar"
+import MainGameComp from "../components/MainGameComp"
+import Games from "../components/Games"
+import React, { useEffect, useState } from "react"
+import StickyFooter from "../components/Footer"
+import { getGames, gameByName } from "../axios"
 
 function Home(props) {
-  const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(false);
+	const [data, setData] = useState([])
+	const [loading, setLoading] = useState(false)
 
-  const getAll = async () => {
-    setLoading(true);
-    const games = await getGames();
-    setData(games);
-    setLoading(false);
-  };
-  const getByName = async (nameSearch) => {
-    setLoading(true);
-    const title = { title: { $regex: nameSearch, $options: "i" } };
-    const games = await gameByName(title);
-    setData(games);
-    setLoading(false);
-  };
-  const getBySort = async (sortGenre, sortPlatform) => {
-    setLoading(true);
-    const games = await getGames(sortGenre, sortPlatform);
-    setData(games);
-    setLoading(false);
-  };
+	const getAll = async () => {
+		setLoading(true)
+		const games = await getGames()
+		setData(games)
+		setLoading(false)
+	}
+	const getByName = async (nameSearch) => {
+		setLoading(true)
+		const title = { title: { $regex: nameSearch, $options: "i" } }
+		const games = await gameByName(title)
+		setData(games)
+		setLoading(false)
+	}
+	const getBySort = async (sortGenre, sortPlatform) => {
+		setLoading(true)
+		const games = await getGames(sortGenre, sortPlatform)
+		setData(games)
+		setLoading(false)
+	}
 
-  useEffect(() => {
-    getAll();
-  }, []);
+	useEffect(() => {
+		getAll()
+	}, [])
 
-  return (
-    <div style={{ minHeight: "100vh", backgroundColor: "#DDDDDD" }}>
-      <AppBarComponent user={props.user} cart="2" setUser={props.setUser} />
-      <MainGameComp />
-      <Games
-        games={data}
-        loading={loading}
-        getBySort={getBySort}
-        getByName={getByName}
-        getAll={getAll}
-      />
+	return (
+		<div style={{ minHeight: "100vh", backgroundColor: "#DDDDDD" }}>
+			<AppBarComponent user={props.user} cart="2" setUser={props.setUser} />
+			<MainGameComp user={props.user} />
+			<Games
+				games={data}
+				loading={loading}
+				getBySort={getBySort}
+				getByName={getByName}
+				getAll={getAll}
+			/>
 
-      <StickyFooter />
-    </div>
-  );
+			<StickyFooter />
+		</div>
+	)
 }
 
-export default Home;
+export default Home
