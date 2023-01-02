@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Box, Button, Typography, Rating, ButtonGroup } from "@mui/material";
 import CheckIcon from "@mui/icons-material/Check";
-import Iframe from "react-iframe";
 
 function Game(props) {
   const [item, setItem] = useState("");
@@ -19,17 +18,13 @@ function Game(props) {
         justifyContent: "center",
       }}
     >
-      <h1>{item.title}</h1>
+      <Typography
+        variant="h3"
+        sx={{ fontFamily: "Segoe UI Symbol", paddingBottom: "2vh" }}
+      >
+        {item.title}
+      </Typography>
       <Box sx={{ paddingBottom: "1vh", display: "flex" }}>
-        <Iframe
-          url="https://cdn.akamai.steamstatic.com/steam/apps/256919601/movie480_vp9.webm?t=1670316051"
-          width="500"
-          height="284vh"
-          id=""
-          className=""
-          display="block"
-          position="relative"
-        />
         <Box
           sx={{
             display: "flex",
@@ -38,12 +33,11 @@ function Game(props) {
           }}
         >
           <img
+            alt=""
             src={item.thumbnail}
             style={{
-              height: "15vh",
-              width: "20vw",
-              paddingBottom: "2vh",
-              borderRadius: "10px",
+              marginBottom: "5vh",
+              borderRadius: "20px",
             }}
           />
           <Rating
@@ -61,32 +55,32 @@ function Game(props) {
             <Button>Add To Cart </Button>
           </ButtonGroup>
         </Box>
-      </Box>
+        <Box sx={{ paddingLeft: "2vw", paddingBottom: "2vh" }}>
+          <Typography
+            sx={{
+              paddingBottom: "3vw",
+              textAlign: "center",
+              fontFamily: "fantasy",
+              color: "HighlightText",
+            }}
+            variant="h4"
+          >
+            {item.short_description}
+          </Typography>
 
-      <Box sx={{ paddingBottom: "2vh" }}>
-        <Typography variant="h5">{item.short_description}</Typography>
-      </Box>
-      <Box
-        sx={{
-          justifyContent: "space-around",
-          display: "flex",
-          paddingBottom: "1vh",
-        }}
-      >
-        <Typography sx={{ textAlign: "left" }} variant="h6">
-          {"Released: " + item.release_date}
-        </Typography>
-        <Typography variant="h6">{"Genre: " + item.genre}</Typography>
-      </Box>
-      <Box
-        sx={{
-          justifyContent: "space-around",
-          display: "flex",
-          paddingBottom: "1vh",
-        }}
-      >
-        <Typography variant="h6">{"Publisher : " + item.publisher}</Typography>
-        <Typography variant="h6">{"Develper: : " + item.developer}</Typography>
+          <Typography sx={{}} variant="h6">
+            {"Released: " + item.release_date}
+          </Typography>
+          <Typography variant="h6">{"Genre: " + item.genre}</Typography>
+
+          <Typography variant="h6">
+            {"Publisher : " + item.publisher}
+          </Typography>
+          <Typography variant="h6">
+            {"Develper: : " + item.developer}
+          </Typography>
+          <Typography variant="h6">{"Price : " + item.price + "$"}</Typography>
+        </Box>
       </Box>
     </Box>
   );
