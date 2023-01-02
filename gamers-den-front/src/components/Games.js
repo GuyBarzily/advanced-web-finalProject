@@ -62,7 +62,15 @@ function Games(props) {
       >
         {!props.loading &&
           items.map((game, index) => {
-            return <SmallGame key={index} item={game} onClick={openModal} />;
+            return (
+              <SmallGame
+                key={index}
+                item={game}
+                onClick={openModal}
+                setUser={props.setUser}
+                user={props.user}
+              />
+            );
           })}
         {props.loading && <Circular />}
       </Box>
