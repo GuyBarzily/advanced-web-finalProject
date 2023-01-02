@@ -37,7 +37,7 @@ function Home(props) {
     <div style={{ minHeight: "100vh", backgroundColor: "#DDDDDD" }}>
       <AppBarComponent
         user={props.user}
-        setUser={props.handleChangeUser}
+        setUser={props.setUser}
         cart={props.cart}
       />
       <MainGameComp user={props.user} />
