@@ -40,8 +40,7 @@ function AppBarComponent(props) {
 
   useEffect(() => {
     setUser(props.user);
-    setCartValue(props.cart);
-  }, [props.user, props.cart]);
+  }, [props.user]);
 
   return (
     <Box sx={{ flexGrow: 1, paddingBottom: "10vh" }}>
@@ -62,14 +61,25 @@ function AppBarComponent(props) {
             The Gamers Den
           </Typography>
 
-          {user && (
+          {props.user && (
             <div style={{ paddingRight: "1vw", paddingLeft: "1vw" }}>
-              <Badge color="secondary" badgeContent={cartValue}>
+              <Badge color="secondary" badgeContent={props.user.cart.length}>
                 <ShoppingCartIcon
                   sx={{ cursor: "pointer" }}
                   onClick={handleShopingCartClick}
                 />
               </Badge>
+              {props.user.isAdmin && (
+                <Button
+                  sx={{ paddingLeft: "1vw" }}
+                  variant="text"
+                  onClick={() => {
+                    navigate("/admin");
+                  }}
+                >
+                  Go to Admin
+                </Button>
+              )}
             </div>
           )}
 
@@ -80,14 +90,14 @@ function AppBarComponent(props) {
             color="inherit"
             onClick={openMenuHandle}
           >
-            {user && (
+            {props.user && (
               <Avatar
-                alt={user.email}
+                alt={props.user.firstName}
                 src="/static/images/avatar/2.jpg"
                 fontSize="large"
               />
             )}
-            {!user && (
+            {!props.user && (
               <Avatar
                 alt=""
                 src="/static/images/avatar/2.jpg"

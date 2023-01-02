@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Box, Button, TextField } from "@mui/material";
 
-function Admin() {
+function Admin(props) {
+  useEffect(() => {}, []);
   return (
     <Box
       sx={{
