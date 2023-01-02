@@ -17,16 +17,39 @@ function SmallGame(props) {
   const [addAlert, setAddAlert] = useState(false);
   const [faildAlert, setFailedAlert] = useState(false);
 
-  const handleShopCartAdd = () => {
-    console.log(item);
-    // setAddAlert(true);
-    // setTimeout(() => {
-    //   setAddAlert(false);
-    // }, 3000);
+  const doesExists = () => {
+    let ret = props.user.cart.some((element) => {
+      return JSON.stringify(element) === JSON.stringify(item);
+    });
+    return ret;
+  };
+
+  const handleAdd = () => {
+    setAddAlert(true);
+    setTimeout(() => {
+      setAddAlert(false);
+    }, 3000);
+  };
+  const handleFailed = () => {
     setFailedAlert(true);
     setTimeout(() => {
       setFailedAlert(false);
     }, 3000);
+  };
+  const handleShopCartAdd = () => {
+    if (props.user) {
+      if (!doesExists()) {
+        props.setUser({
+          ...props.user,
+          cart: [...props.user.cart, item],
+        });
+        handleAdd();
+      } else {
+        handleFailed();
+      }
+    } else {
+      handleFailed();
+    }
   };
 
   const handleClick = () => {
@@ -36,7 +59,7 @@ function SmallGame(props) {
   useEffect(() => {
     setItem(props.item);
     setValue(props.item.rating);
-  }, [props.item]);
+  }, [props.item, props.user]);
 
   return (
     <div>

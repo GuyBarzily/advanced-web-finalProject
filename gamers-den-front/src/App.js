@@ -10,11 +10,7 @@ import SignUp from "./pages/SignUp";
 function App() {
   const [user, setUser] = useState(null);
 
-  useEffect(() => {
-    if (user) {
-      console.log(user.isAdmin);
-    }
-  }, []);
+  useEffect(() => {}, [user]);
   return (
     <Router>
       <Routes>
