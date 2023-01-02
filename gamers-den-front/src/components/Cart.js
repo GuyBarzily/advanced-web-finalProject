@@ -3,6 +3,8 @@ import { Box } from "@mui/material";
 import CartTitle from "./CartTitle";
 import AppBarComponent from "./AppBar";
 import StickyFooter from "./Footer";
+import CartGames from "./CartGames";
+import CartTotal from "./CartTotal";
 function Cart(props) {
   return (
     <div>
@@ -11,10 +13,18 @@ function Cart(props) {
         sx={{
           minHeight: "90vh",
           display: "flex",
-          justifyContent: "center",
+
+          alignItems: "center",
+          flexDirection: "column",
         }}
       >
-        <CartTitle name="Guy" />
+        {props.user && (
+          <>
+            <CartTitle name={props.user.firstName} />
+            <CartGames user={props.user} setUser={props.setUser} />
+            <CartTotal user={props.user} />
+          </>
+        )}
       </Box>
       <StickyFooter />
     </div>

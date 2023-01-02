@@ -65,6 +65,7 @@ function Games(props) {
             return (
               <SmallGame
                 key={index}
+                add={true}
                 item={game}
                 onClick={openModal}
                 setUser={props.setUser}
