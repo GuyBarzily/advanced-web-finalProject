@@ -10,6 +10,7 @@ import {
   Alert,
 } from "@mui/material";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+import RemoveShoppingCartIcon from "@mui/icons-material/RemoveShoppingCart";
 
 function SmallGame(props) {
   const [value, setValue] = useState(0);
@@ -50,6 +51,15 @@ function SmallGame(props) {
     } else {
       handleFailed();
     }
+  };
+
+  const handleShopCartRemove = () => {
+    const arr = [...props.user.cart];
+    arr.splice(item, 1);
+    props.setUser({
+      ...props.user,
+      cart: arr,
+    });
   };
 
   const handleClick = () => {
@@ -114,10 +124,19 @@ function SmallGame(props) {
           </Typography>
         </CardContent>
         <CardActions>
-          <AddShoppingCartIcon
-            sx={{ cursor: "pointer" }}
-            onClick={handleShopCartAdd}
-          />
+          {props.add && (
+            <AddShoppingCartIcon
+              sx={{ cursor: "pointer" }}
+              onClick={handleShopCartAdd}
+            />
+          )}
+          {!props.add && (
+            <RemoveShoppingCartIcon
+              sx={{ cursor: "pointer" }}
+              onClick={handleShopCartRemove}
+            />
+          )}
+
           <Rating
             sx={{ paddingLeft: "1vw" }}
             name="simple-controlled"
