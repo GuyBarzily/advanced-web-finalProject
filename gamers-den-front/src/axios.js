@@ -1,4 +1,3 @@
-
 import axios from "axios"
 
 export const getGames = async (genre, platform) => {
@@ -41,19 +40,24 @@ export const getCarouselGames = async () => {
 }
 
 export const getGroupBy = async (genre, platform) => {
-  let sort = {};
-  if (genre !== "All") {
-    sort.genre = genre;
-  }
-  if (platform !== "All") {
-    sort.platform = platform;
-  }
-  const data = { $match: sort };
-  const games = await axios.post("http://localhost:8080/groupBy", data);
-  let ret = [];
-  games.data.forEach((sort) => {
-    ret = [...ret, ...sort.games];
-  });
-  return ret;
-};
+	let sort = {}
+	if (genre !== "All") {
+		sort.genre = genre
+	}
+	if (platform !== "All") {
+		sort.platform = platform
+	}
+	const data = { $match: sort }
+	const games = await axios.post("http://localhost:8080/groupBy", data)
+	let ret = []
+	games.data.forEach((sort) => {
+		ret = [...ret, ...sort.games]
+	})
+	return ret
+}
 
+export const updateUser = async (user) => {
+	const update = await axios.post("http://localhost:8080/updateUser", user)
+	console.log(update)
+	return update.data
+}
