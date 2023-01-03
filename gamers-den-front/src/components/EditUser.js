@@ -21,14 +21,13 @@ const MenuProps = {
 }
 
 function EditUser() {
-	
 	const [selectUserMail, setSelectUserMail] = useState("")
 	const [newFirstName, setNewFirstName] = useState("")
 	const [newLastName, setNewLastName] = useState("")
 	const [isAdmin, setIsAdmin] = useState(false)
 	const [addAlert, setAddAlert] = useState(false)
-
 	const [data, setData] = useState([])
+
 	const getUsers = async () => {
 		const users = await getAllUsers()
 		setData(users)
@@ -80,7 +79,7 @@ function EditUser() {
 			}}
 		>
 			<h1>Hello admin</h1>
-			<h2>Add new game:</h2>
+			<h2>Edit user:</h2>
 			<Box
 				component="form"
 				sx={{
