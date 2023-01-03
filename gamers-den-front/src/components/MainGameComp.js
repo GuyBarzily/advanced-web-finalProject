@@ -6,7 +6,6 @@ import { useEffect } from "react"
 
 function MainGameComp(props) {
 	useEffect(() => {
-		console.log(props.user)
 	}, [])
 
 	return (
