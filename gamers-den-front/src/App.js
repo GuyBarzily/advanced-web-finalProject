@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import CannotReach from "./components/CannotReach";
 import Cart from "./components/Cart";
 import Admin from "./pages/Admin";
+import CheckOut from "./pages/CheckOut";
 import Home from "./pages/Home";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
@@ -28,6 +29,13 @@ function App() {
         <Route
           path="/admin"
           element={user ? <Admin user={user} /> : <CannotReach />}
+        />
+
+        <Route
+          path="/checkOut"
+          element={
+            user ? <CheckOut user={user} setUser={setUser} /> : <CannotReach />
+          }
         />
       </Routes>
     </Router>
