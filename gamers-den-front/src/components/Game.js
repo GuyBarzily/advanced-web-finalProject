@@ -4,7 +4,7 @@ import CheckIcon from "@mui/icons-material/Check";
 
 function Game(props) {
   const [item, setItem] = useState("");
-  const [value, setValue] = useState(2);
+  const [value, setValue] = useState(0);
 
   useEffect(() => {
     setItem(props.game);
@@ -56,17 +56,32 @@ function Game(props) {
           </ButtonGroup>
         </Box>
         <Box sx={{ paddingLeft: "2vw", paddingBottom: "2vh" }}>
-          <Typography
-            sx={{
-              paddingBottom: "3vw",
-              textAlign: "center",
-              fontFamily: "fantasy",
-              color: "HighlightText",
-            }}
-            variant="h4"
-          >
-            {item.short_description}
-          </Typography>
+          {item && item.short_description.length < 40 && (
+            <Typography
+              sx={{
+                paddingBottom: "3vw",
+                textAlign: "center",
+                fontFamily: "fantasy",
+                color: "HighlightText",
+              }}
+              variant="h4"
+            >
+              {item.short_description}
+            </Typography>
+          )}
+          {item && item.short_description.length >= 40 && (
+            <Typography
+              sx={{
+                paddingBottom: "3vw",
+                textAlign: "center",
+                fontFamily: "fantasy",
+                color: "HighlightText",
+              }}
+              variant="h5"
+            >
+              {item.short_description}
+            </Typography>
+          )}
 
           <Typography sx={{}} variant="h6">
             {"Released: " + item.release_date}
