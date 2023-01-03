@@ -49,6 +49,7 @@ function Home(props) {
         getBySort={getBySort}
         getByName={getByName}
         getAll={getAll}
+        handleAddToCart={props.handleAddToCart}
       />
 
       <StickyFooter />

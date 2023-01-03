@@ -27,6 +27,7 @@ function CartGames(props) {
               item={game}
               onClick={() => {}}
               setUser={props.setUser}
+              handleRemoveFromCart={props.handleRemoveFromCart}
               user={props.user}
             />
           );

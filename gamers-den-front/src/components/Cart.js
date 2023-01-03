@@ -15,7 +15,7 @@ function Cart(props) {
         sx={{
           minHeight: "90vh",
           display: "flex",
-
+          marginBottom: "5vh",
           alignItems: "center",
           flexDirection: "column",
         }}
@@ -23,7 +23,11 @@ function Cart(props) {
         {props.user && (
           <>
             <CartTitle name={props.user.firstName} />
-            <CartGames user={props.user} setUser={props.setUser} />
+            <CartGames
+              user={props.user}
+              setUser={props.setUser}
+              handleRemoveFromCart={props.handleRemoveFromCart}
+            />
             <CartTotal user={props.user} />
             <Button
               variant="outlined"

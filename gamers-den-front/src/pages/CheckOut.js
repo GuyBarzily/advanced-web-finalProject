@@ -4,12 +4,13 @@ import AppBarComponent from "../components/AppBar";
 import CheckOutItem from "../components/CheckOutItem";
 import CartTotal from "../components/CartTotal";
 import { useNavigate } from "react-router-dom";
+import { addPurchase } from "../axios";
 function CheckOut(props) {
   const [items, setItems] = useState([]);
   const [buyAlert, setBuyAlert] = useState(false);
   const navigate = useNavigate();
 
-  const handleBuy = () => {
+  const handleBuy = async () => {
     let sum = 0;
     items.forEach((i) => {
       sum += i.price;
@@ -22,12 +23,14 @@ function CheckOut(props) {
       amount: sum,
       date: date,
     };
+
+    const ret = await addPurchase(purchase);
+    props.handlePurchase();
     setBuyAlert(true);
     setTimeout(() => {
       setBuyAlert(false);
       navigate("/");
     }, 2000);
-    console.log(purchase);
   };
   useEffect(() => {
     if (props.user) {

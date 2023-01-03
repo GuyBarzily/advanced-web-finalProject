@@ -7,15 +7,65 @@ import CheckOut from "./pages/CheckOut";
 import Home from "./pages/Home";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
+import { updateUser } from "./axios";
 
 function App() {
   const [user, setUser] = useState(null);
+
+  const handleAddToCart = async (item) => {
+    const newCart = [...user.cart, item];
+    setUser({
+      ...user,
+      cart: newCart,
+    });
+    const upDate = {
+      user: { email: user.email },
+      update: { cart: newCart },
+    };
+    const res = await updateUser(upDate);
+  };
+
+  const handleRemoveFromCart = async (item) => {
+    console.log(item);
+    const arr = [...user.cart];
+    arr.splice(item, 1);
+    setUser({
+      ...user,
+      cart: arr,
+    });
+    const upDate = {
+      user: { email: user.email },
+      update: { cart: arr },
+    };
+    const res = await updateUser(upDate);
+  };
+
+  const handlePurchase = async () => {
+    setUser({
+      ...user,
+      cart: [],
+    });
+    const upDate = {
+      user: { email: user.email },
+      update: { cart: [] },
+    };
+    const res = await updateUser(upDate);
+  };
 
   useEffect(() => {}, [user]);
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Home user={user} setUser={setUser} />} />
+        <Route
+          path="/"
+          element={
+            <Home
+              user={user}
+              setUser={setUser}
+              handleAddToCart={handleAddToCart}
+            />
+          }
+        />
         <Route
           path="/sign-in"
           element={<SignIn user={user} setUser={setUser} />}
@@ -24,7 +74,16 @@ function App() {
           path="/sign-up"
           element={<SignUp user={user} setUser={setUser} />}
         />
-        <Route path="/cart" element={<Cart user={user} setUser={setUser} />} />
+        <Route
+          path="/cart"
+          element={
+            <Cart
+              user={user}
+              setUser={setUser}
+              handleRemoveFromCart={handleRemoveFromCart}
+            />
+          }
+        />
 
         <Route
           path="/admin"
@@ -34,7 +93,15 @@ function App() {
         <Route
           path="/checkOut"
           element={
-            user ? <CheckOut user={user} setUser={setUser} /> : <CannotReach />
+            user ? (
+              <CheckOut
+                user={user}
+                setUser={setUser}
+                handlePurchase={handlePurchase}
+              />
+            ) : (
+              <CannotReach />
+            )
           }
         />
       </Routes>

@@ -76,6 +76,7 @@ function Games(props) {
                 onClick={openModal}
                 setUser={props.setUser}
                 user={props.user}
+                handleAddToCart={props.handleAddToCart}
               />
             );
           })}
