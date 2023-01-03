@@ -3,7 +3,7 @@ import MainGameComp from "../components/MainGameComp";
 import Games from "../components/Games";
 import React, { useEffect, useState } from "react";
 import StickyFooter from "../components/Footer";
-import { getGames, gameByName } from "../axios";
+import { getGames, gameByName, getGroupBy } from "../axios";
 
 function Home(props) {
   const [data, setData] = useState([]);
@@ -24,7 +24,7 @@ function Home(props) {
   };
   const getBySort = async (sortGenre, sortPlatform) => {
     setLoading(true);
-    const games = await getGames(sortGenre, sortPlatform);
+    const games = await getGroupBy(sortGenre, sortPlatform);
     setData(games);
     setLoading(false);
   };

@@ -1,13 +1,66 @@
 import React, { useEffect, useState } from "react";
-import { Box, Button, Typography, Rating, ButtonGroup } from "@mui/material";
+import {
+  Box,
+  Button,
+  Typography,
+  Rating,
+  ButtonGroup,
+  Alert,
+} from "@mui/material";
 import CheckIcon from "@mui/icons-material/Check";
+import { useNavigate } from "react-router-dom";
 
 function Game(props) {
   const [item, setItem] = useState("");
-  const [value, setValue] = useState(2);
+  const [value, setValue] = useState(0);
+  const [addAlert, setAddAlert] = useState(false);
+  const [faildAlert, setFailedAlert] = useState(false);
+
+  const navigate = useNavigate();
+
+  const doesExists = () => {
+    let ret = props.user.cart.some((element) => {
+      return JSON.stringify(element) === JSON.stringify(item);
+    });
+    return ret;
+  };
+
+  const handleAdd = () => {
+    setAddAlert(true);
+    setTimeout(() => {
+      setAddAlert(false);
+    }, 3000);
+  };
+  const handleFailed = () => {
+    setFailedAlert(true);
+    setTimeout(() => {
+      setFailedAlert(false);
+    }, 3000);
+  };
+
+  const handleAddToCart = () => {
+    console.log(props.user);
+    if (props.user) {
+      if (!doesExists()) {
+        props.setUser({
+          ...props.user,
+          cart: [...props.user.cart, item],
+        });
+        handleAdd();
+      } else {
+        handleFailed();
+      }
+    }
+  };
+
+  const handlePurchaseNow = () => {
+    handleAddToCart();
+    navigate("/cart");
+  };
 
   useEffect(() => {
     setItem(props.game);
+    setValue(props.game.rating);
   }, [props.game]);
   return (
     <Box
@@ -49,24 +102,39 @@ function Game(props) {
             }}
           />
           <ButtonGroup sx={{ color: "Highlight" }} variant="contained">
-            <Button>
+            <Button onClick={handlePurchaseNow}>
               Purchase Now <CheckIcon sx={{ paddingLeft: "1vw" }} />
             </Button>
-            <Button>Add To Cart </Button>
+            <Button onClick={handleAddToCart}>Add To Cart </Button>
           </ButtonGroup>
         </Box>
         <Box sx={{ paddingLeft: "2vw", paddingBottom: "2vh" }}>
-          <Typography
-            sx={{
-              paddingBottom: "3vw",
-              textAlign: "center",
-              fontFamily: "fantasy",
-              color: "HighlightText",
-            }}
-            variant="h4"
-          >
-            {item.short_description}
-          </Typography>
+          {item && item.short_description.length < 40 && (
+            <Typography
+              sx={{
+                paddingBottom: "3vw",
+                textAlign: "center",
+                fontFamily: "fantasy",
+                color: "HighlightText",
+              }}
+              variant="h4"
+            >
+              {item.short_description}
+            </Typography>
+          )}
+          {item && item.short_description.length >= 40 && (
+            <Typography
+              sx={{
+                paddingBottom: "3vw",
+                textAlign: "center",
+                fontFamily: "fantasy",
+                color: "HighlightText",
+              }}
+              variant="h5"
+            >
+              {item.short_description}
+            </Typography>
+          )}
 
           <Typography sx={{}} variant="h6">
             {"Released: " + item.release_date}
@@ -82,6 +150,8 @@ function Game(props) {
           <Typography variant="h6">{"Price : " + item.price + "$"}</Typography>
         </Box>
       </Box>
+      {addAlert && <Alert severity="success">Item Added To Cart</Alert>}
+      {faildAlert && <Alert severity="error">Item Allredy in Cart</Alert>}
     </Box>
   );
 }

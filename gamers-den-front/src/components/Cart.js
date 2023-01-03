@@ -1,11 +1,13 @@
 import React from "react";
-import { Box } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import CartTitle from "./CartTitle";
 import AppBarComponent from "./AppBar";
 import StickyFooter from "./Footer";
 import CartGames from "./CartGames";
 import CartTotal from "./CartTotal";
+import { useNavigate } from "react-router-dom";
 function Cart(props) {
+  const navigate = useNavigate();
   return (
     <div>
       <AppBarComponent user={props.user} setUser={props.setUser} />
@@ -23,6 +25,15 @@ function Cart(props) {
             <CartTitle name={props.user.firstName} />
             <CartGames user={props.user} setUser={props.setUser} />
             <CartTotal user={props.user} />
+            <Button
+              variant="outlined"
+              sx={{ marginBottom: "2vh" }}
+              onClick={() => {
+                navigate("/checkOut");
+              }}
+            >
+              Check Out
+            </Button>
           </>
         )}
       </Box>
