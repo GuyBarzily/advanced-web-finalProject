@@ -30,10 +30,8 @@ function CheckOut(props) {
     console.log(purchase);
   };
   useEffect(() => {
-    console.log(props.user);
     if (props.user) {
       setItems(props.user.cart);
-      console.log(items);
     }
   }, [props.user, items]);
   return (
