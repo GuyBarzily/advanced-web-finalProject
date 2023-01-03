@@ -13,7 +13,6 @@ export default function JoyCard(props) {
 
 	useEffect(() => {
 		setGame(props.game)
-		console.log(props.game)
 	}, [props.game])
 
 	const h1Style = {
