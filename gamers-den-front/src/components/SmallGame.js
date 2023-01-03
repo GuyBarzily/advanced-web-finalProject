@@ -39,10 +39,7 @@ function SmallGame(props) {
   const handleShopCartAdd = () => {
     if (props.user) {
       if (!doesExists()) {
-        props.setUser({
-          ...props.user,
-          cart: [...props.user.cart, item],
-        });
+        props.handleAddToCart(item);
         handleAdd();
       } else {
         handleFailed();
@@ -53,12 +50,7 @@ function SmallGame(props) {
   };
 
   const handleShopCartRemove = () => {
-    const arr = [...props.user.cart];
-    arr.splice(item, 1);
-    props.setUser({
-      ...props.user,
-      cart: arr,
-    });
+    props.handleRemoveFromCart(item);
   };
 
   const handleClick = () => {
