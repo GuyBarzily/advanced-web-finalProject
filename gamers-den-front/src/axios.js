@@ -29,6 +29,11 @@ export const getUser = async (userId) => {
 	return user.data
 }
 
+export const getAllUsers = async () => {
+	const users = await axios.post("http://localhost:8080/getAllUsers")
+	return users.data
+}
+
 export const getCarouselGames = async () => {
 	const games = await axios.post("http://localhost:8080/Carousel")
 	return games.data
