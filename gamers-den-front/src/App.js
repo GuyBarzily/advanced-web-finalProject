@@ -29,6 +29,13 @@ function App() {
     });
   };
 
+  const handlePurchase = async () => {
+    setUser({
+      ...user,
+      cart: [],
+    });
+  };
+
   useEffect(() => {}, [user]);
   return (
     <Router>
@@ -70,7 +77,15 @@ function App() {
         <Route
           path="/checkOut"
           element={
-            user ? <CheckOut user={user} setUser={setUser} /> : <CannotReach />
+            user ? (
+              <CheckOut
+                user={user}
+                setUser={setUser}
+                handlePurchase={handlePurchase}
+              />
+            ) : (
+              <CannotReach />
+            )
           }
         />
       </Routes>
