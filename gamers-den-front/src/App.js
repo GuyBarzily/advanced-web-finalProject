@@ -7,16 +7,22 @@ import CheckOut from "./pages/CheckOut";
 import Home from "./pages/Home";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
+import { updateUser } from "./axios";
 
 function App() {
   const [user, setUser] = useState(null);
 
   const handleAddToCart = async (item) => {
+    const newCart = [...user.cart, item];
     setUser({
       ...user,
-      cart: [...user.cart, item],
+      cart: newCart,
     });
-    const upDate = {};
+    const upDate = {
+      user: { email: user.email },
+      update: { cart: newCart },
+    };
+    const res = await updateUser(upDate);
   };
 
   const handleRemoveFromCart = async (item) => {
@@ -27,6 +33,23 @@ function App() {
       ...user,
       cart: arr,
     });
+    const upDate = {
+      user: { email: user.email },
+      update: { cart: arr },
+    };
+    const res = await updateUser(upDate);
+  };
+
+  const handlePurchase = async () => {
+    setUser({
+      ...user,
+      cart: [],
+    });
+    const upDate = {
+      user: { email: user.email },
+      update: { cart: [] },
+    };
+    const res = await updateUser(upDate);
   };
 
   useEffect(() => {}, [user]);
@@ -70,7 +93,15 @@ function App() {
         <Route
           path="/checkOut"
           element={
-            user ? <CheckOut user={user} setUser={setUser} /> : <CannotReach />
+            user ? (
+              <CheckOut
+                user={user}
+                setUser={setUser}
+                handlePurchase={handlePurchase}
+              />
+            ) : (
+              <CannotReach />
+            )
           }
         />
       </Routes>

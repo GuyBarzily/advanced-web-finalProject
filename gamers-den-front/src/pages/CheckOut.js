@@ -25,6 +25,7 @@ function CheckOut(props) {
     };
 
     const ret = await addPurchase(purchase);
+    props.handlePurchase();
     setBuyAlert(true);
     setTimeout(() => {
       setBuyAlert(false);

@@ -15,7 +15,7 @@ function Cart(props) {
         sx={{
           minHeight: "90vh",
           display: "flex",
-
+          marginBottom: "5vh",
           alignItems: "center",
           flexDirection: "column",
         }}
