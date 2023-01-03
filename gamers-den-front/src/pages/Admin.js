@@ -1,12 +1,24 @@
-import React, { useEffect } from "react"
+import React, { useEffect ,useState} from "react"
 import { Box, Button, TextField } from "@mui/material"
 import Checkbox from "@mui/material/Checkbox"
 import FormControlLabel from "@mui/material/FormControlLabel"
+import FormControl from "@mui/material/FormControl"
+import Select from "@mui/material/Select"
+import InputLabel from "@mui/material/InputLabel"
+import MenuItem from "@mui/material/MenuItem"
+import { getAllUsers } from "../axios.js"
 
-const label = { inputProps: { "aria-label": "Checkbox demo" } }
 
 function Admin(props) {
-	useEffect(() => {}, [])
+	
+	const [data, setData] = useState([]);
+	const getUsers = async () => {
+		const users = await getAllUsers();
+		setData(users);	
+	  };
+	useEffect(() => {
+		getUsers()
+	}, [])
 	return (
 		<Box
 			sx={{
@@ -54,6 +66,31 @@ function Admin(props) {
 					</Box>
 					<Box>
 						<h1>Edit user</h1>
+						<FormControl fullWidth>
+							<InputLabel id="demo-simple-select-label">
+								choose user by mail
+							</InputLabel>
+							<Select
+								labelId="demo-simple-select-label"
+								id="demo-simple-select"
+								value={""}
+								label="by mail"
+								
+							>
+								
+								
+								{data.map((user, index) => {
+									return (
+										<MenuItem key={index}>{user.email}</MenuItem>
+									)
+									
+								})}
+								{/* <MenuItem value={10}>Ten</MenuItem>
+								<MenuItem value={20}>Twenty</MenuItem>
+								<MenuItem value={30}>Thirty</MenuItem> */}
+							</Select>
+						</FormControl>
+								
 						<TextField
 							required
 							id="outlined-required"
