@@ -51,7 +51,13 @@ function Games(props) {
         setSortPlatform={props.setSortPlatform}
         getByName={props.getByName}
       />
-      <GameModal open={openGame} setClose={closeModal} game={modalItem} />
+      <GameModal
+        open={openGame}
+        setClose={closeModal}
+        game={modalItem}
+        user={props.user}
+        setUser={props.setUser}
+      />
       <Box
         sx={{
           flexDirection: "row",
