@@ -58,6 +58,16 @@ export const getGroupBy = async (genre, platform) => {
 };
 
 export const updateUser = async (user) => {
+
+	const update = await axios.post("http://localhost:8080/updateUser", user)
+	return update.data
+}
+
+export const addGame = async (game) => {
+	const newGame = await axios.post("http://localhost:8080/addGame", game)
+	return newGame.data
+}
+
   const update = await axios.post("http://localhost:8080/updateUser", user);
   console.log(update);
   return update.data;
@@ -67,3 +77,4 @@ export const addPurchase = async (purchase) => {
   const user = await axios.post("http://localhost:8080/addPurchase", purchase);
   return user.data;
 };
+
