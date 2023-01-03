@@ -11,11 +11,38 @@ import SignUp from "./pages/SignUp";
 function App() {
   const [user, setUser] = useState(null);
 
+  const handleAddToCart = async (item) => {
+    setUser({
+      ...user,
+      cart: [...user.cart, item],
+    });
+    const upDate = {};
+  };
+
+  const handleRemoveFromCart = async (item) => {
+    console.log(item);
+    const arr = [...user.cart];
+    arr.splice(item, 1);
+    setUser({
+      ...user,
+      cart: arr,
+    });
+  };
+
   useEffect(() => {}, [user]);
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Home user={user} setUser={setUser} />} />
+        <Route
+          path="/"
+          element={
+            <Home
+              user={user}
+              setUser={setUser}
+              handleAddToCart={handleAddToCart}
+            />
+          }
+        />
         <Route
           path="/sign-in"
           element={<SignIn user={user} setUser={setUser} />}
@@ -24,7 +51,16 @@ function App() {
           path="/sign-up"
           element={<SignUp user={user} setUser={setUser} />}
         />
-        <Route path="/cart" element={<Cart user={user} setUser={setUser} />} />
+        <Route
+          path="/cart"
+          element={
+            <Cart
+              user={user}
+              setUser={setUser}
+              handleRemoveFromCart={handleRemoveFromCart}
+            />
+          }
+        />
 
         <Route
           path="/admin"
