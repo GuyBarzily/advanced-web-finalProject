@@ -35,7 +35,6 @@ export const getCarouselGames = async () => {
 };
 
 export const getGroupBy = async (genre, platform) => {
-  console.log(genre, platform);
   let sort = {};
   if (genre !== "All") {
     sort.genre = genre;
