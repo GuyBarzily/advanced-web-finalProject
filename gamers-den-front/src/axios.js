@@ -71,3 +71,8 @@ export const addPurchase = async (purchase) => {
 	const user = await axios.post("http://localhost:8080/addPurchase", purchase)
 	return user.data
 }
+
+export const deleteGame = async (gameName) => {
+	const game = await axios.post("http://localhost:8080/deleteGame", gameName)
+	return game.data
+}
