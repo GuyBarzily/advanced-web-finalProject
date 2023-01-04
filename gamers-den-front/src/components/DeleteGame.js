@@ -5,6 +5,7 @@ import MenuItem from "@mui/material/MenuItem"
 import FormControl from "@mui/material/FormControl"
 import InputLabel from "@mui/material/InputLabel"
 import { getGames } from "../axios.js"
+import { deleteGame } from "../axios.js"
 
 const ITEM_HEIGHT = 48
 const ITEM_PADDING_TOP = 8
@@ -39,6 +40,21 @@ function DeleteGame() {
 
 	const handleChangeGame = (event) => {
 		setSelectGameTitle(event.target.value)
+	}
+
+	const handleSubmit = (event) => {
+		setSelectGameTitle(event.target.value)
+		const data = {
+			title: selectGameTitle,
+		}
+		const update = async (data) => {
+			const game = await deleteGame(data)
+			if (game !== null) {
+				handleAdd()
+			}
+			return game
+		}
+		update(data)
 	}
 
 	return (
@@ -84,7 +100,7 @@ function DeleteGame() {
 			<Box sx={{ display: "flex", justifyContent: "center", paddingTop: "1vh" }}>
 				<Button
 					type="submit"
-					// onClick={handleSubmit}
+					onClick={handleSubmit}
 					size="large"
 					variant="contained"
 				>
