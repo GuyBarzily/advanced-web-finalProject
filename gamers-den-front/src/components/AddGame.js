@@ -70,10 +70,20 @@ function AddGame() {
 		setReleaseDate(event.target.value)
 	}
 	const handleRatingChange = (event) => {
-		setRating(event.target.value)
+		if (event.target.value <= 0) {
+			setRating(0)
+		} else if (event.target.value >= 5) {
+			setRating(5)
+		} else {
+			setRating(event.target.value)
+		}
 	}
 	const handlePriceChange = (event) => {
-		setPrice(event.target.value)
+		if (event.target.value >= 0) {
+			setPrice(event.target.value)
+		} else {
+			setPrice(0)
+		}
 	}
 
 	return (
@@ -150,18 +160,20 @@ function AddGame() {
 					onChange={handleDeveloperChange}
 				/>
 				<TextField
-					label="Release date"
+					type="date"
 					name="releaseDate"
 					value={releaseDate}
 					onChange={handleReleaseDateChange}
 				/>
 				<TextField
+					type="number"
 					label="Rating"
 					name="rating"
 					value={rating}
 					onChange={handleRatingChange}
 				/>
 				<TextField
+					type="number"
 					label="Price"
 					name="price"
 					value={price}
