@@ -16,6 +16,7 @@ function SmallGame(props) {
   const [item, setItem] = useState("");
   const [addAlert, setAddAlert] = useState(false);
   const [faildAlert, setFailedAlert] = useState(false);
+  const [faildText, setFaildText] = useState("");
 
   const doesExists = () => {
     let ret = props.user.cart.some((element) => {
@@ -31,6 +32,11 @@ function SmallGame(props) {
     }, 3000);
   };
   const handleFailed = () => {
+    if (props.user) {
+      setFaildText("Item Allredy in Cart");
+    } else {
+      setFaildText("Log In Required");
+    }
     setFailedAlert(true);
     setTimeout(() => {
       setFailedAlert(false);
@@ -68,6 +74,11 @@ function SmallGame(props) {
         sx={{
           margin: "1vw",
           borderRadius: "15px",
+
+          ":hover": {
+            transition: "all .25s linear",
+            boxShadow: " -1px 10px 29px 0px rgba(0,0,0,0.8)",
+          },
         }}
       >
         <CardMedia
@@ -137,7 +148,7 @@ function SmallGame(props) {
         </CardActions>
       </Card>
       {addAlert && <Alert severity="success">Item Added To Cart</Alert>}
-      {faildAlert && <Alert severity="error">Item Allredy in Cart</Alert>}
+      {faildAlert && <Alert severity="error">{faildText}</Alert>}
     </div>
   );
 }
