@@ -47,12 +47,11 @@ export default function JoyCard(props) {
 								style={{ fontFamily: "Hanalei Fill" }}
 								level="h2"
 								fontSize="35px"
-								textColor="#fff"
 								mb={1}
 							>
 								{game.title}
 							</Typography>
-							<Typography textColor="neutral.300">{game.short_description}</Typography>
+							<Typography>{game.short_description}</Typography>
 						</CardContent>
 					</div>
 				</Card>
