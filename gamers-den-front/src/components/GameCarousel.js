@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from "react"
 import Carousel from "better-react-carousel"
-import Box from "@mui/joy/Box"
-import Card from "@mui/joy/Card"
-import CardCover from "@mui/joy/CardCover"
 import JoyCard from "./JoyCard"
 import { getCarouselGames } from "../axios"
 
@@ -19,7 +16,7 @@ const GameCarousel = () => {
 	}, [])
 
 	return (
-		<div style={{ width: "40vw", borderRadius: "20px" }}>
+		<div style={{ width: "60vw", height: "auto", borderRadius: "20px" }}>
 			<Carousel cols={1} rows={1} gap={1} loop>
 				{games.map((game, index) => {
 					return (
