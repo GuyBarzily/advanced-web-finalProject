@@ -97,9 +97,7 @@ function Game(props) {
             sx={{ paddingBottom: "2vh" }}
             name="simple-controlled"
             value={value}
-            onChange={(event, newValue) => {
-              setValue(newValue);
-            }}
+            readOnly
           />
           <ButtonGroup sx={{ color: "Highlight" }} variant="contained">
             <Button onClick={handlePurchaseNow}>
