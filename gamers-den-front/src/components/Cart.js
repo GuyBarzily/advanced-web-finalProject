@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Box, Button } from "@mui/material";
 import CartTitle from "./CartTitle";
 import AppBarComponent from "./AppBar";
@@ -8,6 +8,10 @@ import CartTotal from "./CartTotal";
 import { useNavigate } from "react-router-dom";
 function Cart(props) {
   const navigate = useNavigate();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <div>
       <AppBarComponent user={props.user} setUser={props.setUser} />
