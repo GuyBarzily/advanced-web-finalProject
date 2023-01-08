@@ -1,13 +1,9 @@
 import * as React from "react"
-import Box from "@mui/material/Box"
-import Card from "@mui/material/Card"
+import Card from "@mui/joy/Card"
 import CardContent from "@mui/material/CardContent"
-import CardMedia from "@mui/material/CardMedia"
 import Typography from "@mui/material/Typography"
-import { CardActionArea } from "@mui/material"
 import { useEffect, useState } from "react"
-import { maxWidth } from "@mui/system"
-
+import CardCover from "@mui/joy/CardCover"
 export default function JoyCard(props) {
 	const [game, setGame] = useState(null)
 
@@ -15,49 +11,51 @@ export default function JoyCard(props) {
 		setGame(props.game)
 	}, [props.game])
 
-	const h1Style = {
-		color: "yellow",
-		padding: "5px",
-	}
 	let url
 	if (game) {
-		url = "url(" + game.thumbnail + ")"
+		url = "url(" + game.bigImage + ")"
+	}
+	const styles = {
+		overlay: {
+			position: "absolute",
+			bottom: 0,
+			color: "white",
+		},
 	}
 	return (
 		<>
 			{game && (
-				<Box
-					sx={{
-						display: "flex",
-						alignItems: "flex-end",
-						flexDirection: "column",
-						width: "50vw",
-						position: "block",
-					}}
-				>
-					<Box
+				<Card sx={{ width: "100%", height: "65vh" }}>
+					<CardCover>
+						<img
+							src={game.bigImage}
+							srcSet=""
+							loading="lazy"
+							alt=""
+							style={{ height: "100%", width: "100%" }}
+						/>
+					</CardCover>
+					<CardCover
 						sx={{
-							width: "inherit",
-							height: "50vh",
-							backgroundImage: url,
-							backgroundRepeat: "no-repeat",
-							backgroundSize: "contain",
-						}}
-					></Box>
-					<Box
-						sx={{
-							width: "inherit",
 							background:
-								"linear-gradient(90deg, rgba(32,32,32,1) 0%, rgba(40,40,59,1) 61%, rgba(32,32,32,1) 100%);",
-							display: "flex",
-							wrap: "flex-wrap",
-							flexDirection: "column",
+								"linear-gradient(to top, rgba(0,0,0,0.4), rgba(0,0,0,0) 200px), linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0) 300px)",
 						}}
-					>
-						<h2 style={h1Style}>{game.title}</h2>
-						<h4 style={h1Style}>{game.short_description}</h4>
-					</Box>
-				</Box>
+					/>
+					<div style={styles.overlay}>
+						<CardContent sx={{}}>
+							<Typography
+								style={{ fontFamily: "Hanalei Fill" }}
+								level="h2"
+								fontSize="35px"
+								textColor="#fff"
+								mb={1}
+							>
+								{game.title}
+							</Typography>
+							<Typography textColor="neutral.300">{game.short_description}</Typography>
+						</CardContent>
+					</div>
+				</Card>
 			)}
 		</>
 	)
