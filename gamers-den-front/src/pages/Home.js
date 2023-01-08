@@ -4,6 +4,7 @@ import Games from "../components/Games";
 import React, { useEffect, useState } from "react";
 import StickyFooter from "../components/Footer";
 import { getGames, gameByName, getGroupBy } from "../axios";
+import ScrollToTop from "react-scroll-to-top";
 
 function Home(props) {
   const [data, setData] = useState([]);
@@ -40,6 +41,7 @@ function Home(props) {
         setUser={props.setUser}
         cart={props.cart}
       />
+      <ScrollToTop smooth="true" />
       <MainGameComp user={props.user} />
       <Games
         games={data}
