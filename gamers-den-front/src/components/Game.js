@@ -15,6 +15,7 @@ function Game(props) {
   const [value, setValue] = useState(0);
   const [addAlert, setAddAlert] = useState(false);
   const [faildAlert, setFailedAlert] = useState(false);
+  const [failedText, setFaildText] = useState("");
 
   const navigate = useNavigate();
 
@@ -33,6 +34,12 @@ function Game(props) {
   };
   const handleFailed = () => {
     setFailedAlert(true);
+    if (!props.user) {
+      setFaildText("Log In Requierd");
+    } else {
+      setFaildText("Item Already In Cart");
+    }
+
     setTimeout(() => {
       setFailedAlert(false);
     }, 3000);
@@ -50,6 +57,8 @@ function Game(props) {
       } else {
         handleFailed();
       }
+    } else {
+      handleFailed();
     }
   };
 
@@ -149,7 +158,7 @@ function Game(props) {
         </Box>
       </Box>
       {addAlert && <Alert severity="success">Item Added To Cart</Alert>}
-      {faildAlert && <Alert severity="error">Item Allredy in Cart</Alert>}
+      {faildAlert && <Alert severity="error">{failedText}</Alert>}
     </Box>
   );
 }
