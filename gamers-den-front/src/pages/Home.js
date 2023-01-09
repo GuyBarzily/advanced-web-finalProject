@@ -23,9 +23,9 @@ function Home(props) {
     setData(games);
     setLoading(false);
   };
-  const getBySort = async (sortGenre, sortPlatform) => {
+  const getBySort = async (sortGenre, sortPlatform, rating) => {
     setLoading(true);
-    const games = await getGroupBy(sortGenre, sortPlatform);
+    const games = await getGroupBy(sortGenre, sortPlatform, rating);
     setData(games);
     setLoading(false);
   };
