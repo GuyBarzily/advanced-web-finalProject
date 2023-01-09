@@ -30,6 +30,7 @@ function GameModal(props) {
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
+        disableScrollLock={true}
       >
         <Box sx={style}>
           <Game game={props.game} user={props.user} setUser={props.setUser} />

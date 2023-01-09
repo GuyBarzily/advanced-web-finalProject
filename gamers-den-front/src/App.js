@@ -26,7 +26,6 @@ function App() {
   };
 
   const handleRemoveFromCart = async (item) => {
-    console.log(item);
     const arr = [...user.cart];
     arr.splice(item, 1);
     setUser({
@@ -51,6 +50,10 @@ function App() {
     };
     const res = await updateUser(upDate);
   };
+
+  useEffect(() => {
+    console.log("Welcome to the Gamers Den");
+  }, []);
 
   useEffect(() => {}, [user]);
   return (
