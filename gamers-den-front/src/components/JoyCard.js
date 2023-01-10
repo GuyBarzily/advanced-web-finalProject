@@ -4,6 +4,8 @@ import CardContent from "@mui/material/CardContent"
 import Typography from "@mui/material/Typography"
 import { useEffect, useState } from "react"
 import CardCover from "@mui/joy/CardCover"
+import Rating from "@mui/material/Rating"
+
 export default function JoyCard(props) {
 	const [game, setGame] = useState(null)
 
@@ -50,7 +52,14 @@ export default function JoyCard(props) {
 								mb={1}
 							>
 								{game.title}
+								<Rating
+									sx={{ paddingLeft: "1vw" }}
+									name="simple-controlled"
+									value={game.rating}
+									readOnly
+								/>
 							</Typography>
+
 							<Typography>{game.short_description}</Typography>
 						</CardContent>
 					</div>
