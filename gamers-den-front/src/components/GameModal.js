@@ -7,7 +7,7 @@ const style = {
   position: "absolute",
   top: "50%",
   left: "50%",
-  height: "75vh",
+  maxHeight: "80vh",
   transform: "translate(-50%, -50%)",
   bgcolor: "background.paper",
   border: "2px solid #000",
@@ -30,6 +30,7 @@ function GameModal(props) {
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
+        disableScrollLock={true}
       >
         <Box sx={style}>
           <Game game={props.game} user={props.user} setUser={props.setUser} />
