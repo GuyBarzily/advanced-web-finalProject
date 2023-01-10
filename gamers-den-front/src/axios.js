@@ -11,7 +11,6 @@ export const getGames = async (genre, platform) => {
   }
 
   const games = await axios.post("http://localhost:8080/getGames", data);
-  console.log(games.data);
   return games.data;
 };
 
