@@ -17,7 +17,15 @@ const GameCarousel = () => {
 
 	return (
 		<div style={{ width: "60vw", height: "auto", borderRadius: "20px" }}>
-			<Carousel cols={1} rows={1} gap={1} loop>
+			<Carousel
+				cols={1}
+				rows={1}
+				gap={1}
+				loop
+				showDots={true}
+				autoplay={3000}
+				dotColorActive={"black"}
+			>
 				{games.map((game, index) => {
 					return (
 						<Carousel.Item key={index}>
