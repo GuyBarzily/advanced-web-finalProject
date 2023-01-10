@@ -53,6 +53,8 @@ export const getGroupBy = async (genre, platform, rating) => {
   }
   const data = { $match: sort };
   const games = await axios.post("http://localhost:8080/groupBy", data);
+
+  console.log(games.data);
   let ret = [];
   games.data.forEach((sort) => {
     ret = [...ret, ...sort.games];
