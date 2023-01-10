@@ -122,7 +122,6 @@ function Game(props) {
                 paddingBottom: "3vw",
                 textAlign: "center",
                 fontFamily: "fantasy",
-                color: "HighlightText",
               }}
               variant="h4"
             >
@@ -135,7 +134,6 @@ function Game(props) {
                 paddingBottom: "3vw",
                 textAlign: "center",
                 fontFamily: "fantasy",
-                color: "HighlightText",
               }}
               variant="h5"
             >
