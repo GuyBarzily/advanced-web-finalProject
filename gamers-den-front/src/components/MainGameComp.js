@@ -16,7 +16,11 @@ function MainGameComp(props) {
 				flexDirection: "column",
 			}}
 		>
-			<GameCarousel></GameCarousel>
+			<GameCarousel
+				setUser={props.setUser}
+				user={props.user}
+				handleAddToCart={props.handleAddToCart}
+			></GameCarousel>
 		</Box>
 	)
 }

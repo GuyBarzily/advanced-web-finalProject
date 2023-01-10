@@ -3,7 +3,7 @@ import Carousel from "better-react-carousel"
 import JoyCard from "./JoyCard"
 import { getCarouselGames } from "../axios"
 
-const GameCarousel = () => {
+const GameCarousel = (props) => {
 	const [games, setGames] = useState([])
 
 	const getAll = async () => {
@@ -29,7 +29,13 @@ const GameCarousel = () => {
 				{games.map((game, index) => {
 					return (
 						<Carousel.Item key={index}>
-							<JoyCard key={index} game={game}></JoyCard>
+							<JoyCard
+								key={index}
+								game={game}
+								setUser={props.setUser}
+								user={props.user}
+								handleAddToCart={props.handleAddToCart}
+							></JoyCard>
 						</Carousel.Item>
 					)
 				})}
